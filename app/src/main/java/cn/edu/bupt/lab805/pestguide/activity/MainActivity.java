@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.entity.TabEntity;
+import cn.edu.bupt.lab805.pestguide.fragment.MeFragment;
 import cn.edu.bupt.lab805.pestguide.fragment.SimpleCardFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,9 +45,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         mTitles = getResources().getStringArray(R.array.fragment_title);
-        for (String title : mTitles) {
-            fragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + title));
+        for (int i = 0; i < mTitles.length - 1; i++) {
+            fragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[i]));
         }
+        fragments.add(MeFragment.newInstance());
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
