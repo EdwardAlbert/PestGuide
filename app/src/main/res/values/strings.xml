@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">虫情采集</string>
+
+    <!--LoginActivity-->
+    <string name="request_for_username">请输入用户名</string>
+    <string name="request_for_password">请输入密码</string>
+    <string name="tip_net_error">网络错误，请稍后再试</string>
+    <string name="login">登录</string>
+    <string name="copyright_bupt">北京邮电大学现代物流信息网络研究中心</string>
+    <string name="copyright_lky">国家粮食局科学研究院</string>
+
+    <!--MainActivity-->
+</resources>

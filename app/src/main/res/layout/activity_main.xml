@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.edu.bupt.lab805.pestguide.activity.MainActivity">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <FrameLayout
+        android:id="@+id/fl_change"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/common_tablayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actionbar" />
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/common_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_height"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tl_divider_color="#1A000000"
+        app:tl_divider_padding="13dp"
+        app:tl_divider_width="1dp"
+        tl:tl_iconGravity="TOP"
+        tl:tl_iconHeight="20dp"
+        tl:tl_iconMargin="5dp"
+        tl:tl_iconWidth="20dp"
+        tl:tl_indicator_color="@color/colorPrimaryDark"
+        tl:tl_indicator_gravity="TOP"
+        tl:tl_textSelectColor="@color/colorPrimaryDark"
+        tl:tl_textUnselectColor="#66000000"
+        tl:tl_textsize="15sp"
+        tl:tl_underline_color="#DDDDDD"
+        tl:tl_underline_gravity="TOP"
+        tl:tl_underline_height="1dp" />
+
+</android.support.constraint.ConstraintLayout>

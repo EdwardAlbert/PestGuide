@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--MainActivity-->
+    <string-array name="fragment_title">
+        <item >上传</item>
+        <item >粮仓</item>
+        <item >图鉴</item>
+        <item >我的</item>
+    </string-array>
+</resources>
