@@ -1,0 +1,101 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="cn.edu.bupt.lab805.pestguide.fragment.BookFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/book_search_value"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:background="@drawable/search_text_value"
+            android:gravity="center"
+            android:hint="请输入昆虫名称"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/book_search_key"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:background="@drawable/selector_search_key"
+            android:gravity="center"
+            android:src="@mipmap/book_search"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/book_btn_beetle"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button_pest_normal"
+            android:gravity="center"
+            android:text="甲虫类"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp" />
+
+
+        <Button
+            android:id="@+id/book_btn_moth"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_pest_normal"
+            android:gravity="center"
+            android:text="蛾类"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/book_btn_mite"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button_pest_normal"
+            android:gravity="center"
+            android:text="螨类"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/book_tv_caution"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="#FDFBF3"
+        android:gravity="center"
+        android:text="您所搜索的储粮害虫不存在！"
+        android:textColor="#696564"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_pest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>
