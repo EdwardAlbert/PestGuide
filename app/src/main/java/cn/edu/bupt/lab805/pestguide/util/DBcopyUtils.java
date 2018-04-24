@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +23,7 @@ public class DBcopyUtils extends SQLiteOpenHelper {
     //       .getExternalStorageDirectory().getAbsolutePath() + "/pest/";
     private static final String DATABASE_PATH = "/data/data/cn.edu.bupt.lab805.pestguide/";
     private static final String DATABASE_NAME = "notes.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
 
     public DBcopyUtils(Context context) {
@@ -33,7 +34,6 @@ public class DBcopyUtils extends SQLiteOpenHelper {
     public DBcopyUtils(Context context, String name, CursorFactory factory,
                        int version) {
         super(context, name, factory, version);
-        // TODO Auto-generated constructor stub  
         this.mContext = context;
     }
 
@@ -45,7 +45,6 @@ public class DBcopyUtils extends SQLiteOpenHelper {
 
         boolean dbExist = checkDataBase();
 
-        Log.d(LOG_TAG, "dbExist: " + DATABASE_PATH + DATABASE_NAME);
         Log.d(LOG_TAG, "dbExist: " + dbExist);
 
         if (dbExist) {
@@ -68,7 +67,9 @@ public class DBcopyUtils extends SQLiteOpenHelper {
      * @return true if it exists, false if it doesn't
      */
     private boolean checkDataBase() {
-        Log.d(LOG_TAG, "checkDataBase");
+        File file = new File(DATABASE_PATH + DATABASE_NAME);
+        return file.exists();
+       /* Log.d(LOG_TAG, "checkDataBase");
         SQLiteDatabase checkDB = null;
 
         try {
@@ -86,7 +87,7 @@ public class DBcopyUtils extends SQLiteOpenHelper {
             boolean flag = checkDB != null ? true : false;
             Log.i("DBcopyUtils", "checkDataBase: 数据库是否存在：" + flag);
             return flag;
-        }
+        }*/
     }
 
     /**
@@ -102,7 +103,7 @@ public class DBcopyUtils extends SQLiteOpenHelper {
         // Path to the just created empty db  
         String outFileName = DATABASE_PATH + DATABASE_NAME;
 
-        // Open the empty db as the output stream  
+        // Open the empty db as the output stream
         OutputStream myOutput = new FileOutputStream(outFileName);
 
         // transfer bytes from the inputfile to the outputfile  

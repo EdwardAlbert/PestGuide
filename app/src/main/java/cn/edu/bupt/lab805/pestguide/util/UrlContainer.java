@@ -6,5 +6,5 @@ package cn.edu.bupt.lab805.pestguide.util;
 
 public class UrlContainer {
 
-    public static final String baseUrl = "http://220.194.54.81:8080/grainInsects/app/depot/";
+    public static final String baseUrl = "http://106.38.157.60:11808/grainInsects/";
 }

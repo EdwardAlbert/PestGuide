@@ -4,12 +4,21 @@ package cn.edu.bupt.lab805.pestguide.bean;
  * Created by zby on 2017/12/1.
  */
 
-public class LoginBean {
+public class Result<T> {
 
+    private T t;
     private Type type;
     private String content;
     private Integer id;
     private String url;
+
+    public T getT() {
+        return t;
+    }
+
+    public void setT(T t) {
+        this.t = t;
+    }
 
     public Type getType() {
         return type;
@@ -45,8 +54,9 @@ public class LoginBean {
 
     @Override
     public String toString() {
-        return "LoginBean{" +
-                "type=" + type +
+        return "Result{" +
+                "t=" + t +
+                ", type=" + type +
                 ", content='" + content + '\'' +
                 ", id=" + id +
                 ", url='" + url + '\'' +

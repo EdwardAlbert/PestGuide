@@ -5,7 +5,15 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="text_color">#696564</color>
+    <color name="text_green">#3BADA8</color>
+    <color name="text_light_grey">#BCBCBC</color>
     <color name="background">#EBEBEB</color>
+
+    <color name="pestbook1">#35b6c7</color>
+    <color name="pestbook2">#4dc3a9</color>
+    <color name="pestbook3">#93d267</color>
+    <color name="pestbook4">#ffc12a</color>
+    <color name="pestbook5">#ff8047</color>
 
     <color name="white">#ffffff</color><!--白色 -->
     <color name="ivory">#fffff0</color><!--象牙色 -->

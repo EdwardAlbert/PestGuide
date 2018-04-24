@@ -1,4 +1,4 @@
-package cn.edu.bupt.lab805.pestguide.entity;
+package cn.edu.bupt.lab805.pestguide.bean;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
 

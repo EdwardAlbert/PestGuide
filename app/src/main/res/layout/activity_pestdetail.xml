@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="cn.edu.bupt.lab805.pestguide.activity.PestdetailActivity">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
+        android:id="@+id/scrollView_showMessages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/detail_icon"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:src="@mipmap/default_select_image" />
+
+            <TextView
+                android:id="@+id/detail_importance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/detail_icon"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_body"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_below="@+id/detail_importance"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="bottom"
+                android:text="@string/pest_name"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_title" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/leaf_left"
+                android:layout_alignBottom="@+id/detail_name"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/detail_name"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/leaf_right"
+                android:layout_alignBottom="@+id/detail_name"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/detail_name"/>
+
+            <TextView
+                android:id="@+id/detail_category"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/detail_name"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@+id/detail_name"
+                android:gravity="bottom"
+                android:text="@string/pest_category"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:id="@+id/detail_family"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/detail_name"
+                android:layout_marginRight="30dp"
+                android:layout_toLeftOf="@+id/detail_name"
+                android:gravity="bottom"
+                android:text="@string/pest_family"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_body" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/detail_name"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/white_ripple"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/relativelayout_1">
+
+                    <ImageView
+                        android:id="@+id/detail_feature_im"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/leaf1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignBottom="@+id/detail_feature_im"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/detail_feature_im"
+                        android:gravity="center"
+                        android:text="@string/feature"
+                        android:textColor="@color/pestbook1"
+                        android:textSize="@dimen/text_size_subtitle" />
+
+                    <TextView
+                        android:id="@+id/detail_feature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/detail_feature_im"
+                        android:gravity="start"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/text_size_body" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/relativelayout_2">
+
+                    <ImageView
+                        android:id="@+id/detail_habit_im"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/leaf2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignBottom="@+id/detail_habit_im"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/detail_habit_im"
+                        android:gravity="center"
+                        android:text="@string/habit"
+                        android:textColor="@color/pestbook1"
+                        android:textSize="@dimen/text_size_subtitle" />
+
+                    <TextView
+                        android:id="@+id/detail_habit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/detail_habit_im"
+                        android:gravity="start"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/text_size_body" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/relativelayout_3">
+
+                    <ImageView
+                        android:id="@+id/detail_damage_im"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/leaf3" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignBottom="@+id/detail_damage_im"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/detail_damage_im"
+                        android:gravity="center"
+                        android:text="@string/damage"
+                        android:textColor="@color/pestbook3"
+                        android:textSize="@dimen/text_size_subtitle" />
+
+                    <TextView
+                        android:id="@+id/detail_damage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/detail_damage_im"
+                        android:gravity="start"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/text_size_body" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/relativelayout_4">
+
+                    <ImageView
+                        android:id="@+id/detail_distribution_im"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/leaf4" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignBottom="@+id/detail_distribution_im"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/detail_distribution_im"
+                        android:gravity="center"
+                        android:text="@string/distribution"
+                        android:textColor="@color/pestbook4"
+                        android:textSize="@dimen/text_size_subtitle" />
+
+                    <TextView
+                        android:id="@+id/detail_distribution"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/detail_distribution_im"
+                        android:gravity="start"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/text_size_body" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/relativelayout_5">
+
+                    <ImageView
+                        android:id="@+id/detail_prevention_im"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/leaf5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignBottom="@+id/detail_prevention_im"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/detail_prevention_im"
+                        android:gravity="center"
+                        android:text="@string/prevention"
+                        android:textColor="@color/pestbook5"
+                        android:textSize="@dimen/text_size_subtitle" />
+
+                    <TextView
+                        android:id="@+id/detail_prevention"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/detail_prevention_im"
+                        android:gravity="start"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/text_color"
+                        android:textSize="@dimen/text_size_body" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

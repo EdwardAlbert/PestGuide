@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_ripple"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/pest_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@mipmap/default_select_image" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/pest_icon">
+
+            <ImageView
+                android:id="@+id/pest_type_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/book_bettle" />
+
+            <TextView
+                android:id="@+id/pest_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/pest_type_icon"
+                android:gravity="left"
+                android:text="@string/pest_name"
+                android:textColor="@color/text_green"
+                android:textSize="@dimen/text_size_subtitle" />
+
+            <TextView
+                android:id="@+id/pest_importance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/pest_name"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@+id/pest_name"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:id="@+id/pest_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/pest_type_icon"
+                android:layout_below="@+id/pest_type_icon"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="@string/pest_category"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <View
+                android:id="@+id/baselinepest"
+                android:layout_width="1dp"
+                android:layout_height="15sp"
+                android:layout_alignBottom="@+id/pest_category"
+                android:layout_alignTop="@+id/pest_category"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/pest_category"
+                android:background="@color/text_color" />
+
+            <TextView
+                android:id="@+id/pest_family"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/pest_category"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/baselinepest"
+                android:gravity="left"
+                android:text="@string/pest_family"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:id="@+id/pest_feature"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/pest_category"
+                android:layout_below="@+id/pest_category"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="2"
+                android:text="@string/pest_feature"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_small" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

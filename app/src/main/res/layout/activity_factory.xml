@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="cn.edu.bupt.lab805.pestguide.activity.FactoryActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_layout" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/white_ripple"
+            android:clickable="true"
+            android:minHeight="50dp">
+
+            <TextView
+                android:id="@+id/factory_tv_lkmc"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/lkmc"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_subtitle" />
+
+            <TextView
+                android:id="@+id/factory_lkmc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_toRightOf="@+id/factory_tv_lkmc"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/white_ripple"
+            android:clickable="true"
+            android:minHeight="50dp">
+
+            <TextView
+                android:id="@+id/factory_tv_lkbm"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/lkbm"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_subtitle" />
+
+            <TextView
+                android:id="@+id/factory_lkbm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_toRightOf="@+id/factory_tv_lkbm"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/white_ripple"
+            android:clickable="true"
+            android:minHeight="50dp">
+
+            <TextView
+                android:id="@+id/factory_tv_lkdz"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/lkdz"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_subtitle" />
+
+            <TextView
+                android:id="@+id/factory_lkdz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_toRightOf="@+id/factory_tv_lkdz"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/white_ripple"
+            android:clickable="true"
+            android:minHeight="50dp">
+
+            <TextView
+                android:id="@+id/factory_tv_num"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/lc_num"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_subtitle" />
+
+            <TextView
+                android:id="@+id/factory_totalbin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_toRightOf="@+id/factory_tv_num"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/white_ripple"
+            android:clickable="true"
+            android:minHeight="50dp">
+
+            <TextView
+                android:id="@+id/factory_tv_post"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/post"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_subtitle" />
+
+            <TextView
+                android:id="@+id/factory_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_toRightOf="@+id/factory_tv_post"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/white_ripple"
+            android:clickable="true"
+            android:minHeight="50dp">
+
+            <TextView
+                android:id="@+id/factory_tv_contact"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/contact"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_subtitle" />
+
+            <TextView
+                android:id="@+id/factory_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_toRightOf="@+id/factory_tv_contact"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/white_ripple"
+            android:clickable="true"
+            android:minHeight="50dp">
+
+            <TextView
+                android:id="@+id/factory_tv_phone"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="@string/phone"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_subtitle" />
+
+            <TextView
+                android:id="@+id/factory_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_toRightOf="@+id/factory_tv_phone"
+                android:gravity="center"
+                android:inputType="textMultiLine"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

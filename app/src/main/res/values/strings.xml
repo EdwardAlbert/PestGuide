@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">虫情采集</string>
+    <string name="base_url">http://106.38.157.60:11808/grainInsects</string>
 
     <!--LoginActivity-->
     <string name="request_for_username">请输入用户名</string>
@@ -13,4 +14,38 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--MainActivity-->
+
+    <!--BookFragment-->
+    <string name="request_for_pest_name">请输入害虫名称</string>
+    <string name="beetles">甲虫类</string>
+    <string name="moth">蛾类</string>
+    <string name="mite">螨类</string>
+    <string name="pest_not_found">您所搜索的储粮害虫不存在！</string>
+    <string name="pest_name">名称</string>
+    <string name="pest_category">种类</string>
+    <string name="pest_family">科目</string>
+    <string name="pest_feature">详细信息</string>
+
+    <!--PestdetailActivity-->
+    <string name="toolbar_pestdetail">害虫详情</string>
+    <string name="feature">形态特征</string>
+    <string name="habit">生活习性</string>
+    <string name="damage">主要危害</string>
+    <string name="distribution">分布状况</string>
+    <string name="prevention">防治措施</string>
+    <string name="importan">重要</string>
+
+    <!--FactoryActivity-->
+    <string name="lkmc">粮库名称</string>
+    <string name="lkbm">粮库编码</string>
+    <string name="lkdz">粮库地址</string>
+    <string name="lc_num">粮仓数</string>
+    <string name="post">邮政编码</string>
+    <string name="contact">联系人</string>
+    <string name="phone">联系电话</string>
+
+    <!--DepotFrament-->
+    <string name="depot_name">粮仓名称</string>
+    <string name="depot_type">粮仓类型</string>
+    <string name="depot_capacity">粮仓容量</string>
 </resources>

@@ -1,10 +1,10 @@
 package cn.edu.bupt.lab805.pestguide.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
-import android.widget.Toolbar;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -14,12 +14,19 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.bupt.lab805.pestguide.R;
-import cn.edu.bupt.lab805.pestguide.entity.TabEntity;
+import cn.edu.bupt.lab805.pestguide.application.MyApplication;
+import cn.edu.bupt.lab805.pestguide.bean.TabEntity;
+import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
 import cn.edu.bupt.lab805.pestguide.fragment.BookFragment;
+import cn.edu.bupt.lab805.pestguide.fragment.DepotFrament;
 import cn.edu.bupt.lab805.pestguide.fragment.MeFragment;
 import cn.edu.bupt.lab805.pestguide.fragment.SimpleCardFragment;
+import cn.edu.bupt.lab805.pestguide.util.DBHelper;
+import cn.edu.bupt.lab805.pestguide.util.DataUtil;
+import io.reactivex.disposables.Disposable;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -36,19 +43,25 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private ArrayList<Fragment> fragments = new ArrayList<>();
 
+    private DBHelper dbHelper;
+    private DataUtil dataUtil;
+    private Logininfo logininfo;
+    private Disposable disposable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initdatas();
         initViews();
     }
+
     private void initViews() {
         toolbar.setTitle(getString(R.string.app_name));
         mTitles = getResources().getStringArray(R.array.fragment_title);
-        for (int i = 0; i < mTitles.length - 2; i++) {
-            fragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[i]));
-        }
+        fragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[0]));
+        fragments.add(DepotFrament.newInstance());
         fragments.add(BookFragment.newInstance());
         fragments.add(MeFragment.newInstance());
         for (int i = 0; i < mTitles.length; i++) {
@@ -56,4 +69,17 @@ public class MainActivity extends AppCompatActivity {
         }
         mTabLayout.setTabData(mTabEntities, this, R.id.fl_change, fragments);
     }
+
+    /**
+     * 初始化数据
+     */
+    private void initdatas() {
+        dbHelper = DBHelper.getInstance();
+        logininfo = dbHelper.queryLogininfo();
+        dataUtil = DataUtil.getInstance(MyApplication.getInstance());
+        dataUtil.syncFactory(logininfo.getUsername(),logininfo.getPassword());
+        dataUtil.syncUser(logininfo.getUsername(),logininfo.getPassword());
+        dataUtil.syncDepot(logininfo.getUsername(),logininfo.getPassword());
+    }
+
 }
