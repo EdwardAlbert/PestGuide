@@ -25,28 +25,14 @@ public class GrainDao extends AbstractDao<Grain, Long> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property Indate = new Property(1, String.class, "indate", false, "INDATE");
-        public final static Property Clxs = new Property(2, String.class, "clxs", false, "CLXS");
-        public final static Property Grainname = new Property(3, String.class, "grainname", false, "GRAINNAME");
-        public final static Property Harvestdate = new Property(4, String.class, "harvestdate", false, "HARVESTDATE");
-        public final static Property Source = new Property(5, String.class, "source", false, "SOURCE");
-        public final static Property Water = new Property(6, Float.class, "water", false, "WATER");
-        public final static Property Impurity = new Property(7, Float.class, "impurity", false, "IMPURITY");
-        public final static Property Grainheight = new Property(8, Float.class, "grainheight", false, "GRAINHEIGHT");
-        public final static Property Dryingmethod = new Property(9, String.class, "dryingmethod", false, "DRYINGMETHOD");
-        public final static Property Reserveperiod = new Property(10, Integer.class, "reserveperiod", false, "RESERVEPERIOD");
-        public final static Property Innum = new Property(11, Integer.class, "innum", false, "INNUM");
-        public final static Property Container = new Property(12, String.class, "container", false, "CONTAINER");
-        public final static Property Empty_bin500pa = new Property(13, Integer.class, "empty_bin500pa", false, "EMPTY_BIN500PA");
-        public final static Property Halfemptybin500pa = new Property(14, Integer.class, "halfemptybin500pa", false, "HALFEMPTYBIN500PA");
-        public final static Property Fullbin300pa = new Property(15, Integer.class, "fullbin300pa", false, "FULLBIN300PA");
-        public final static Property Halffullbin = new Property(16, Integer.class, "halffullbin", false, "HALFFULLBIN");
-        public final static Property Storetechnology = new Property(17, String.class, "storetechnology", false, "STORETECHNOLOGY");
-        public final static Property Storemethod = new Property(18, String.class, "storemethod", false, "STOREMETHOD");
-        public final static Property Controltemperaturemeasures = new Property(19, String.class, "controltemperaturemeasures", false, "CONTROLTEMPERATUREMEASURES");
-        public final static Property Controlhumiditymeasures = new Property(20, String.class, "controlhumiditymeasures", false, "CONTROLHUMIDITYMEASURES");
-        public final static Property Modifier = new Property(21, String.class, "modifier", false, "MODIFIER");
-        public final static Property Modifytime = new Property(22, String.class, "modifytime", false, "MODIFYTIME");
+        public final static Property Lcbm = new Property(1, String.class, "lcbm", false, "LCBM");
+        public final static Property Indate = new Property(2, String.class, "indate", false, "INDATE");
+        public final static Property Clxs = new Property(3, String.class, "clxs", false, "CLXS");
+        public final static Property Grainname = new Property(4, String.class, "grainname", false, "GRAINNAME");
+        public final static Property Harvestdate = new Property(5, String.class, "harvestdate", false, "HARVESTDATE");
+        public final static Property Source = new Property(6, String.class, "source", false, "SOURCE");
+        public final static Property Reserveperiod = new Property(7, Integer.class, "reserveperiod", false, "RESERVEPERIOD");
+        public final static Property Innum = new Property(8, Integer.class, "innum", false, "INNUM");
     }
 
 
@@ -63,28 +49,14 @@ public class GrainDao extends AbstractDao<Grain, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"GRAIN\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
-                "\"INDATE\" TEXT," + // 1: indate
-                "\"CLXS\" TEXT," + // 2: clxs
-                "\"GRAINNAME\" TEXT," + // 3: grainname
-                "\"HARVESTDATE\" TEXT," + // 4: harvestdate
-                "\"SOURCE\" TEXT," + // 5: source
-                "\"WATER\" REAL," + // 6: water
-                "\"IMPURITY\" REAL," + // 7: impurity
-                "\"GRAINHEIGHT\" REAL," + // 8: grainheight
-                "\"DRYINGMETHOD\" TEXT," + // 9: dryingmethod
-                "\"RESERVEPERIOD\" INTEGER," + // 10: reserveperiod
-                "\"INNUM\" INTEGER," + // 11: innum
-                "\"CONTAINER\" TEXT," + // 12: container
-                "\"EMPTY_BIN500PA\" INTEGER," + // 13: empty_bin500pa
-                "\"HALFEMPTYBIN500PA\" INTEGER," + // 14: halfemptybin500pa
-                "\"FULLBIN300PA\" INTEGER," + // 15: fullbin300pa
-                "\"HALFFULLBIN\" INTEGER," + // 16: halffullbin
-                "\"STORETECHNOLOGY\" TEXT," + // 17: storetechnology
-                "\"STOREMETHOD\" TEXT," + // 18: storemethod
-                "\"CONTROLTEMPERATUREMEASURES\" TEXT," + // 19: controltemperaturemeasures
-                "\"CONTROLHUMIDITYMEASURES\" TEXT," + // 20: controlhumiditymeasures
-                "\"MODIFIER\" TEXT," + // 21: modifier
-                "\"MODIFYTIME\" TEXT);"); // 22: modifytime
+                "\"LCBM\" TEXT," + // 1: lcbm
+                "\"INDATE\" TEXT," + // 2: indate
+                "\"CLXS\" TEXT," + // 3: clxs
+                "\"GRAINNAME\" TEXT," + // 4: grainname
+                "\"HARVESTDATE\" TEXT," + // 5: harvestdate
+                "\"SOURCE\" TEXT," + // 6: source
+                "\"RESERVEPERIOD\" INTEGER," + // 7: reserveperiod
+                "\"INNUM\" INTEGER);"); // 8: innum
     }
 
     /** Drops the underlying database table. */
@@ -102,114 +74,44 @@ public class GrainDao extends AbstractDao<Grain, Long> {
             stmt.bindLong(1, id);
         }
  
+        String lcbm = entity.getLcbm();
+        if (lcbm != null) {
+            stmt.bindString(2, lcbm);
+        }
+ 
         String indate = entity.getIndate();
         if (indate != null) {
-            stmt.bindString(2, indate);
+            stmt.bindString(3, indate);
         }
  
         String clxs = entity.getClxs();
         if (clxs != null) {
-            stmt.bindString(3, clxs);
+            stmt.bindString(4, clxs);
         }
  
         String grainname = entity.getGrainname();
         if (grainname != null) {
-            stmt.bindString(4, grainname);
+            stmt.bindString(5, grainname);
         }
  
         String harvestdate = entity.getHarvestdate();
         if (harvestdate != null) {
-            stmt.bindString(5, harvestdate);
+            stmt.bindString(6, harvestdate);
         }
  
         String source = entity.getSource();
         if (source != null) {
-            stmt.bindString(6, source);
-        }
- 
-        Float water = entity.getWater();
-        if (water != null) {
-            stmt.bindDouble(7, water);
-        }
- 
-        Float impurity = entity.getImpurity();
-        if (impurity != null) {
-            stmt.bindDouble(8, impurity);
-        }
- 
-        Float grainheight = entity.getGrainheight();
-        if (grainheight != null) {
-            stmt.bindDouble(9, grainheight);
-        }
- 
-        String dryingmethod = entity.getDryingmethod();
-        if (dryingmethod != null) {
-            stmt.bindString(10, dryingmethod);
+            stmt.bindString(7, source);
         }
  
         Integer reserveperiod = entity.getReserveperiod();
         if (reserveperiod != null) {
-            stmt.bindLong(11, reserveperiod);
+            stmt.bindLong(8, reserveperiod);
         }
  
         Integer innum = entity.getInnum();
         if (innum != null) {
-            stmt.bindLong(12, innum);
-        }
- 
-        String container = entity.getContainer();
-        if (container != null) {
-            stmt.bindString(13, container);
-        }
- 
-        Integer empty_bin500pa = entity.getEmpty_bin500pa();
-        if (empty_bin500pa != null) {
-            stmt.bindLong(14, empty_bin500pa);
-        }
- 
-        Integer halfemptybin500pa = entity.getHalfemptybin500pa();
-        if (halfemptybin500pa != null) {
-            stmt.bindLong(15, halfemptybin500pa);
-        }
- 
-        Integer fullbin300pa = entity.getFullbin300pa();
-        if (fullbin300pa != null) {
-            stmt.bindLong(16, fullbin300pa);
-        }
- 
-        Integer halffullbin = entity.getHalffullbin();
-        if (halffullbin != null) {
-            stmt.bindLong(17, halffullbin);
-        }
- 
-        String storetechnology = entity.getStoretechnology();
-        if (storetechnology != null) {
-            stmt.bindString(18, storetechnology);
-        }
- 
-        String storemethod = entity.getStoremethod();
-        if (storemethod != null) {
-            stmt.bindString(19, storemethod);
-        }
- 
-        String controltemperaturemeasures = entity.getControltemperaturemeasures();
-        if (controltemperaturemeasures != null) {
-            stmt.bindString(20, controltemperaturemeasures);
-        }
- 
-        String controlhumiditymeasures = entity.getControlhumiditymeasures();
-        if (controlhumiditymeasures != null) {
-            stmt.bindString(21, controlhumiditymeasures);
-        }
- 
-        String modifier = entity.getModifier();
-        if (modifier != null) {
-            stmt.bindString(22, modifier);
-        }
- 
-        String modifytime = entity.getModifytime();
-        if (modifytime != null) {
-            stmt.bindString(23, modifytime);
+            stmt.bindLong(9, innum);
         }
     }
 
@@ -222,114 +124,44 @@ public class GrainDao extends AbstractDao<Grain, Long> {
             stmt.bindLong(1, id);
         }
  
+        String lcbm = entity.getLcbm();
+        if (lcbm != null) {
+            stmt.bindString(2, lcbm);
+        }
+ 
         String indate = entity.getIndate();
         if (indate != null) {
-            stmt.bindString(2, indate);
+            stmt.bindString(3, indate);
         }
  
         String clxs = entity.getClxs();
         if (clxs != null) {
-            stmt.bindString(3, clxs);
+            stmt.bindString(4, clxs);
         }
  
         String grainname = entity.getGrainname();
         if (grainname != null) {
-            stmt.bindString(4, grainname);
+            stmt.bindString(5, grainname);
         }
  
         String harvestdate = entity.getHarvestdate();
         if (harvestdate != null) {
-            stmt.bindString(5, harvestdate);
+            stmt.bindString(6, harvestdate);
         }
  
         String source = entity.getSource();
         if (source != null) {
-            stmt.bindString(6, source);
-        }
- 
-        Float water = entity.getWater();
-        if (water != null) {
-            stmt.bindDouble(7, water);
-        }
- 
-        Float impurity = entity.getImpurity();
-        if (impurity != null) {
-            stmt.bindDouble(8, impurity);
-        }
- 
-        Float grainheight = entity.getGrainheight();
-        if (grainheight != null) {
-            stmt.bindDouble(9, grainheight);
-        }
- 
-        String dryingmethod = entity.getDryingmethod();
-        if (dryingmethod != null) {
-            stmt.bindString(10, dryingmethod);
+            stmt.bindString(7, source);
         }
  
         Integer reserveperiod = entity.getReserveperiod();
         if (reserveperiod != null) {
-            stmt.bindLong(11, reserveperiod);
+            stmt.bindLong(8, reserveperiod);
         }
  
         Integer innum = entity.getInnum();
         if (innum != null) {
-            stmt.bindLong(12, innum);
-        }
- 
-        String container = entity.getContainer();
-        if (container != null) {
-            stmt.bindString(13, container);
-        }
- 
-        Integer empty_bin500pa = entity.getEmpty_bin500pa();
-        if (empty_bin500pa != null) {
-            stmt.bindLong(14, empty_bin500pa);
-        }
- 
-        Integer halfemptybin500pa = entity.getHalfemptybin500pa();
-        if (halfemptybin500pa != null) {
-            stmt.bindLong(15, halfemptybin500pa);
-        }
- 
-        Integer fullbin300pa = entity.getFullbin300pa();
-        if (fullbin300pa != null) {
-            stmt.bindLong(16, fullbin300pa);
-        }
- 
-        Integer halffullbin = entity.getHalffullbin();
-        if (halffullbin != null) {
-            stmt.bindLong(17, halffullbin);
-        }
- 
-        String storetechnology = entity.getStoretechnology();
-        if (storetechnology != null) {
-            stmt.bindString(18, storetechnology);
-        }
- 
-        String storemethod = entity.getStoremethod();
-        if (storemethod != null) {
-            stmt.bindString(19, storemethod);
-        }
- 
-        String controltemperaturemeasures = entity.getControltemperaturemeasures();
-        if (controltemperaturemeasures != null) {
-            stmt.bindString(20, controltemperaturemeasures);
-        }
- 
-        String controlhumiditymeasures = entity.getControlhumiditymeasures();
-        if (controlhumiditymeasures != null) {
-            stmt.bindString(21, controlhumiditymeasures);
-        }
- 
-        String modifier = entity.getModifier();
-        if (modifier != null) {
-            stmt.bindString(22, modifier);
-        }
- 
-        String modifytime = entity.getModifytime();
-        if (modifytime != null) {
-            stmt.bindString(23, modifytime);
+            stmt.bindLong(9, innum);
         }
     }
 
@@ -342,28 +174,14 @@ public class GrainDao extends AbstractDao<Grain, Long> {
     public Grain readEntity(Cursor cursor, int offset) {
         Grain entity = new Grain( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // indate
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // clxs
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // grainname
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // harvestdate
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // source
-            cursor.isNull(offset + 6) ? null : cursor.getFloat(offset + 6), // water
-            cursor.isNull(offset + 7) ? null : cursor.getFloat(offset + 7), // impurity
-            cursor.isNull(offset + 8) ? null : cursor.getFloat(offset + 8), // grainheight
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // dryingmethod
-            cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // reserveperiod
-            cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // innum
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // container
-            cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13), // empty_bin500pa
-            cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14), // halfemptybin500pa
-            cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15), // fullbin300pa
-            cursor.isNull(offset + 16) ? null : cursor.getInt(offset + 16), // halffullbin
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // storetechnology
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // storemethod
-            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // controltemperaturemeasures
-            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // controlhumiditymeasures
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // modifier
-            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22) // modifytime
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // lcbm
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // indate
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // clxs
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // grainname
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // harvestdate
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // source
+            cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // reserveperiod
+            cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8) // innum
         );
         return entity;
     }
@@ -371,28 +189,14 @@ public class GrainDao extends AbstractDao<Grain, Long> {
     @Override
     public void readEntity(Cursor cursor, Grain entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setIndate(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setClxs(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setGrainname(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setHarvestdate(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setSource(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setWater(cursor.isNull(offset + 6) ? null : cursor.getFloat(offset + 6));
-        entity.setImpurity(cursor.isNull(offset + 7) ? null : cursor.getFloat(offset + 7));
-        entity.setGrainheight(cursor.isNull(offset + 8) ? null : cursor.getFloat(offset + 8));
-        entity.setDryingmethod(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setReserveperiod(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
-        entity.setInnum(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
-        entity.setContainer(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setEmpty_bin500pa(cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13));
-        entity.setHalfemptybin500pa(cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14));
-        entity.setFullbin300pa(cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15));
-        entity.setHalffullbin(cursor.isNull(offset + 16) ? null : cursor.getInt(offset + 16));
-        entity.setStoretechnology(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setStoremethod(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
-        entity.setControltemperaturemeasures(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
-        entity.setControlhumiditymeasures(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setModifier(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
-        entity.setModifytime(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setLcbm(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setIndate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setClxs(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setGrainname(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setHarvestdate(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setSource(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setReserveperiod(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
+        entity.setInnum(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
      }
     
     @Override

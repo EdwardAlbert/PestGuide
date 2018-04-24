@@ -1,6 +1,7 @@
 package cn.edu.bupt.lab805.pestguide.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.bupt.lab805.pestguide.R;
+import cn.edu.bupt.lab805.pestguide.activity.DepotActivity;
 import cn.edu.bupt.lab805.pestguide.adapter.DepotAdapter;
 import cn.edu.bupt.lab805.pestguide.entity.Depot;
 import cn.edu.bupt.lab805.pestguide.util.DBHelper;
@@ -64,7 +66,9 @@ public class DepotFrament extends Fragment {
         adapter.setOnItemClickListener(new DepotAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int pos) {
-                Log.d(TAG, "onItemClick: " + pos);
+                Intent intent = new Intent(getActivity(), DepotActivity.class);
+                intent.putExtra("lcbm",datas.get(pos).getLcbm());
+                startActivity(intent);
             }
         });
     }

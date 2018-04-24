@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private void initdatas() {
         dbHelper = DBHelper.getInstance();
         logininfo = dbHelper.queryLogininfo();
-        dataUtil = DataUtil.getInstance(MyApplication.getInstance());
+        dataUtil = DataUtil.getInstance();
         dataUtil.syncFactory(logininfo.getUsername(),logininfo.getPassword());
         dataUtil.syncUser(logininfo.getUsername(),logininfo.getPassword());
         dataUtil.syncDepot(logininfo.getUsername(),logininfo.getPassword());

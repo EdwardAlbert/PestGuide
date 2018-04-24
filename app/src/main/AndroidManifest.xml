@@ -26,7 +26,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.PestdetailActivity" />
-        <activity android:name=".activity.FactoryActivity"></activity>
+        <activity android:name=".activity.FactoryActivity" />
+        <activity android:name=".activity.DepotActivity" />
+        <activity android:name=".activity.DepotEditActivity"></activity>
     </application>
 
 </manifest>

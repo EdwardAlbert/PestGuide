@@ -19,6 +19,7 @@ import cn.edu.bupt.lab805.pestguide.dao.UploadDao;
 import cn.edu.bupt.lab805.pestguide.dao.UserDao;
 import cn.edu.bupt.lab805.pestguide.entity.Depot;
 import cn.edu.bupt.lab805.pestguide.entity.Factory;
+import cn.edu.bupt.lab805.pestguide.entity.Grain;
 import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
 import cn.edu.bupt.lab805.pestguide.entity.Pest;
 import cn.edu.bupt.lab805.pestguide.entity.User;
@@ -198,5 +199,46 @@ public class DBHelper {
      */
     public void deleteAllDepot(){
         depotDao.deleteAll();
+    }
+
+    /**
+     * 通过粮仓编码查询粮仓
+     * @param lcbm
+     * @return
+     */
+    public Depot queryDepotByLCBM(String lcbm) {
+        return depotDao.queryBuilder().where(DepotDao.Properties.Lcbm.eq(lcbm)).unique();
+    }
+
+    /**
+     * 插入粮情信息
+     * @param grain
+     */
+    public void insertGrain(Grain grain){
+        grainDao.insert(grain);
+    }
+
+    /**
+     * 根据粮仓编码查询粮情
+     * @param lcbm
+     * @return
+     */
+    public Grain queryGrainByLCBM(String lcbm){
+        try{
+            return grainDao.queryBuilder().where(GrainDao.Properties.Lcbm.eq(lcbm)).unique();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 根据粮仓编码删除粮情
+     * @param lcbm
+     * @return
+     */
+    public void deleteGrainByLCBM(String lcbm){
+        List<Grain> list = grainDao.queryBuilder().where(GrainDao.Properties.Lcbm.eq(lcbm)).list();
+        grainDao.deleteInTx(list);
     }
 }

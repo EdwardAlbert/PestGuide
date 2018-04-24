@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.edu.bupt.lab805.pestguide.activity.DepotActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_layout" />
+
+        <RelativeLayout
+            android:id="@+id/depot_caution"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/caution"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/relativelayout_2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignTop="@+id/find_lcbm"
+                        android:layout_marginRight="5dp"
+                        android:src="@mipmap/find_depot"/>
+
+                    <TextView
+                        android:id="@+id/depot_lcmc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:text="@string/depot_name"
+                        android:textColor="@color/text_light_grey"
+                        android:textSize="@dimen/text_size_body"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@mipmap/find_depottype"/>
+
+                    <TextView
+                        android:id="@+id/depot_depottype"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:text="@string/depot_type"
+                        android:textColor="@color/text_light_grey"
+                        android:textSize="@dimen/text_size_body"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@mipmap/find_capacity"/>
+
+                    <TextView
+                        android:id="@+id/depot_capacity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:text="@string/depot_capacity"
+                        android:textColor="@color/text_light_grey"
+                        android:textSize="@dimen/text_size_body"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/depot_tv_lcmc"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_body"/>
+
+                <TextView
+                    android:id="@+id/depot_tv_depottype"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_body"/>
+
+                <TextView
+                    android:id="@+id/depot_tv_capacity"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_body"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/relativelayout_1">
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="@color/pestbook1"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignTop="@+id/depot_detail"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/depot_detail"
+                android:src="@mipmap/depot_detail"/>
+
+            <TextView
+                android:id="@+id/depot_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/view1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/depot_detail"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_grainname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/depot_detail"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/depot_grainname"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_grainname"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/depot_grainname"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/depot_grainname"
+                android:text="未知"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_clxs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/depot_tv_grainname"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/depot_tv_grainname"
+                android:text="@string/depot_clxs"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_clxs"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/depot_clxs"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/depot_clxs"
+                android:text="未知"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_innum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/depot_grainname"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/depot_innum"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_innum"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/depot_innum"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/depot_innum"
+                android:text="未知"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/depot_tv_innum"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/depot_tv_innum"
+                android:text="@string/depot_source"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_source"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/depot_source"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/depot_source"
+                android:text="未知"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_indate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/depot_innum"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/depot_indate"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_indate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/depot_indate"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/depot_indate"
+                android:text="未知"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_harvestdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/depot_indate"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/depot_harvestdate"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_harvestdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/depot_harvestdate"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/depot_harvestdate"
+                android:text="未知"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_reserveperiod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/depot_harvestdate"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/depot_reserveperiod"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_reserveperiod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/depot_reserveperiod"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/depot_reserveperiod"
+                android:text="未知"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/relativelayout_2">
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="@color/pestbook2"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignTop="@+id/depot_action"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/depot_action"
+                android:src="@mipmap/depot_action"/>
+
+            <TextView
+                android:id="@+id/depot_action"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/view2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/depot_action"
+                android:textColor="#696564"
+                android:textSize="15sp"/>
+
+            <RelativeLayout
+                android:id="@+id/time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_below="@id/depot_action"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="90dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/pestbook2"/>
+
+                <View
+                    android:id="@+id/spot1"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/time_spot_gray"/>
+
+                <View
+                    android:id="@+id/spot2"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/spot1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/time_spot_gray"/>
+
+                <View
+                    android:id="@+id/spot3"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/spot2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/time_spot"/>
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/depot_tv_actiontime1"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/time_view"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/time_view"
+                android:gravity="center"
+                android:text="@string/depot_action_date"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_actiontime2"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/time_view"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="35dp"
+                android:layout_toRightOf="@+id/time_view"
+                android:gravity="center"
+                android:text="@string/depot_action_date"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_actiontime3"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/time_view"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="65dp"
+                android:layout_toRightOf="@+id/time_view"
+                android:gravity="center"
+                android:text="@string/depot_action_date"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_action1"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/depot_tv_actiontime1"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/depot_tv_actiontime1"
+                android:gravity="center"
+                android:text="@string/depot_action_content"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_action2"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/depot_tv_actiontime2"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/depot_tv_actiontime2"
+                android:gravity="center"
+                android:text="@string/depot_action_content"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:id="@+id/depot_tv_action3"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignTop="@+id/depot_tv_actiontime3"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/depot_tv_actiontime3"
+                android:gravity="center"
+                android:text="@string/depot_action_content"
+                android:textColor="@color/text_light_grey"
+                android:textSize="@dimen/text_size_body"/>
+
+            <ImageView
+                android:id="@+id/img_delete_grain_depot"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignTop="@+id/depot_tv_action3"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/depot_tv_action3"
+                android:src="@drawable/selector_action_delete"/>
+
+            <ImageButton
+                android:id="@+id/depot_bn_actionadd"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignLeft="@+id/time_view"
+                android:layout_below="@+id/time_view"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_action_add"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

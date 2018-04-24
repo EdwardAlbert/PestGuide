@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.edu.bupt.lab805.pestguide.activity.DepotEditActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <include layout="@layout/toolbar_layout" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:id="@+id/edit_et_grainname"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_input"
+                android:gravity="center"
+                android:hint="@string/choose_grain"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <Spinner
+                android:id="@+id/edit_sp_clxs"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/edit_et_grainname"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:prompt="@string/choose_type"
+                android:spinnerMode="dialog"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <EditText
+                android:id="@+id/edit_et_innum"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/edit_sp_clxs"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_input"
+                android:gravity="center"
+                android:hint="@string/choose_innum"
+                android:inputType="number"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@+id/edit_et_innum"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/edit_et_innum"
+                android:gravity="bottom"
+                android:text="@string/ton"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+            <EditText
+                android:id="@+id/edit_et_source"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/edit_et_innum"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_input"
+                android:gravity="center"
+                android:hint="@string/choose_source"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body"/>
+
+
+            <TextView
+                android:id="@+id/edit_tv_indate"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/edit_et_source"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_input"
+                android:gravity="center"
+                android:hint="@string/choose_indate"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <ImageButton
+                android:id="@+id/edit_btn_calenderindate"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignBottom="@+id/edit_tv_indate"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/edit_tv_indate"
+                android:background="@drawable/selector_calender"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/edit_tv_harvestdate"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/edit_tv_indate"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_input"
+                android:gravity="center"
+                android:hint="@string/choose_harvestdate"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <ImageButton
+                android:id="@+id/edit_btn_calenderharvestdate"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignBottom="@+id/edit_tv_harvestdate"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/edit_tv_harvestdate"
+                android:background="@drawable/selector_calender"
+                android:scaleType="centerCrop" />
+
+            <EditText
+                android:id="@+id/edit_et_reserve"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/edit_tv_harvestdate"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selector_input"
+                android:gravity="center"
+                android:hint="@string/choose_reserve"
+                android:inputType="number"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignBottom="@+id/edit_et_reserve"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/edit_et_reserve"
+                android:gravity="bottom"
+                android:text="@string/year"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <Button
+                android:id="@+id/edit_btn_submit"
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/edit_et_reserve"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/selector_button_main"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_body" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</ScrollView>

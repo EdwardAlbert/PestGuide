@@ -53,49 +53,55 @@ public class LoginActivity extends AppCompatActivity {
             etPassWord.requestFocus();
             return;
         }
-        if (disposable != null && !disposable.isDisposed()) return;
+        if (disposable != null) return;
         login(etUserName.getText().toString(), etPassWord.getText().toString());
     }
 
     private void login(final String username, final String password) {
         Api api = MyApplication.getInstance().getApi();
-        api.login(username, password)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Result>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        disposable = d;
-                    }
-
-                    @Override
-                    public void onNext(Result result) {
-                        switch (result.getType()) {
-                            case success:
-                                //写入登录信息
-                                Logininfo logininfo = new Logininfo(null, username, password, null, null);
-                                dbHelper.insertLogininfo(logininfo);
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                finish();
-                                break;
-                            case error:
-                                Snackbar.make(btnLogin, result.getContent(), Snackbar.LENGTH_SHORT).show();
-                                break;
+        try {
+            api.login(username, password)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<Result>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            disposable = d;
                         }
 
-                    }
+                        @Override
+                        public void onNext(Result result) {
+                            switch (result.getType()) {
+                                case success:
+                                    //写入登录信息
+                                    Logininfo logininfo = new Logininfo(null, username, password, null, null);
+                                    dbHelper.insertLogininfo(logininfo);
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    finish();
+                                    break;
+                                case error:
+                                    Snackbar.make(btnLogin, result.getContent(), Snackbar.LENGTH_SHORT).show();
+                                    break;
+                            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        Snackbar.make(btnLogin, getString(R.string.tip_net_error), Snackbar.LENGTH_SHORT).show();
-                    }
+                        }
 
-                    @Override
-                    public void onComplete() {
-                        disposable.dispose();
-                    }
-                });
+                        @Override
+                        public void onError(Throwable e) {
+                            e.printStackTrace();
+                            Snackbar.make(btnLogin, getString(R.string.tip_net_error), Snackbar.LENGTH_SHORT).show();
+                            disposable = null;
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            disposable.dispose();
+                            disposable = null;
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

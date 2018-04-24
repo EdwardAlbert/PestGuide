@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.pest.activity.MainActivity">
+
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@mipmap/actionbar_edit"
+        android:orderInCategory="100"
+        android:title="编辑"
+        app:showAsAction="always" />
+
+</menu>

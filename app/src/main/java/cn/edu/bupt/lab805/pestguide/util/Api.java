@@ -7,6 +7,7 @@ import cn.edu.bupt.lab805.pestguide.bean.Page;
 import cn.edu.bupt.lab805.pestguide.bean.Result;
 import cn.edu.bupt.lab805.pestguide.entity.Depot;
 import cn.edu.bupt.lab805.pestguide.entity.Factory;
+import cn.edu.bupt.lab805.pestguide.entity.Grain;
 import cn.edu.bupt.lab805.pestguide.entity.User;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -35,4 +36,17 @@ public interface Api {
     @FormUrlEncoded
     Observable<Result<Page<Depot>>> getDepot(@Field("username") String username, @Field("password") String password,
                                              @Field("page") Integer page, @Field("rows") Integer rows);
+
+    @POST("app/depot/datacollect/getLastGrain")
+    @FormUrlEncoded
+    Observable<Result<Grain>> getGrain(@Field("username") String username, @Field("password") String password,
+                                       @Field("lcbm") String lcbm);
+
+    @POST("app/depot/datacollect/uploadGrain")
+    @FormUrlEncoded
+    Observable<Result> uploadGrain(@Field("username") String username, @Field("password") String password,
+                                   @Field("lcbm") String lcbm, @Field("grainname") String grainname,
+                                   @Field("source") String source,@Field("clxs") String clxs,
+                                   @Field("innum") Integer innum, @Field("indate") String indate,
+                                   @Field("harvestdate") String harvestdate, @Field("reserveperiod") Integer reserveperiod);
 }

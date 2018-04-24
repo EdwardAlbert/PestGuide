@@ -67,7 +67,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initViews() {
-        if (tvFactory != null)
+        if (factory != null)
             tvFactory.setText(factory.getLkmc());
         if (user != null) {
             tvName.setText(user.getRealname());

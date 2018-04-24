@@ -48,4 +48,33 @@
     <string name="depot_name">粮仓名称</string>
     <string name="depot_type">粮仓类型</string>
     <string name="depot_capacity">粮仓容量</string>
+
+    <!--DepotActivity-->
+    <string name="depot_desc">粮仓信息</string>
+    <string name="depot_detail">粮情信息</string>
+    <string name="depot_grainname">粮种名称</string>
+    <string name="depot_clxs">存粮形式</string>
+    <string name="depot_innum">入储数量</string>
+    <string name="depot_source">粮食产地</string>
+    <string name="depot_indate">入储日期</string>
+    <string name="depot_harvestdate">收获日期</string>
+    <string name="depot_reserveperiod">存储期限</string>
+    <string name="depot_action">工艺信息</string>
+    <string name="depot_action_date">2015-06-07</string>
+    <string name="depot_action_content">惰性粉杀虫</string>
+    <string name="ton">吨</string>
+
+    <!--DepotEditActivity-->
+    <string name="choose_grain">请输入粮种名称</string>
+    <string name="choose_type">请选择装粮形式</string>
+    <string name="choose_innum">请输入入储数量</string>
+    <string name="choose_source">请输入粮食产地</string>
+    <string name="choose_indate">请输入入储时间</string>
+    <string name="choose_harvestdate">请输入收获时间</string>
+    <string name="choose_reserve">请输入存储年限</string>
+    <string name="submit">提交</string>
+    <string name="year">年</string>
+    <string name="upload_fail">上传失败!</string>
+    <string name="upload_success">上传成功!</string>
+    <string name="uploading">数据上传中……</string>
 </resources>
