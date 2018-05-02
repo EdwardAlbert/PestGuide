@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
 
@@ -80,8 +81,10 @@ public class PestdetailActivity extends AppCompatActivity {
         File file = new File(path);
         if (file.exists())
             Log.d(TAG, "initViews: 图片路径 " + file.getAbsolutePath());
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.mipmap.default_select_image);
         Glide.with(this).load(path)
-                .placeholder(R.mipmap.default_select_image).into(img_icon);
+                .apply(options).into(img_icon);
     }
 
     private void initDatas() {

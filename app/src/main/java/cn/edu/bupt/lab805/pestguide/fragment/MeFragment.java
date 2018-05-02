@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.activity.FactoryActivity;
 import cn.edu.bupt.lab805.pestguide.entity.Factory;
@@ -31,6 +32,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private Factory factory;
     private User user;
 
+    private Unbinder unbinder;
+
     public MeFragment() {
     }
 
@@ -48,7 +51,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         initdatas();
         initViews();
         view.findViewById(R.id.me_factory).setOnClickListener(this);
@@ -82,5 +85,11 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), FactoryActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

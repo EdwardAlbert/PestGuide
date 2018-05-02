@@ -16,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.activity.DepotActivity;
 import cn.edu.bupt.lab805.pestguide.adapter.DepotAdapter;
@@ -33,6 +34,7 @@ public class DepotFrament extends Fragment {
     private DBHelper dbHelper;
     private List<Depot> datas;
     private DepotAdapter adapter;
+    private Unbinder unbinder;
 
 
     public DepotFrament() {
@@ -48,7 +50,7 @@ public class DepotFrament extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_depot, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         initDatas();
         initViews();
         return view;
@@ -71,6 +73,12 @@ public class DepotFrament extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
 }

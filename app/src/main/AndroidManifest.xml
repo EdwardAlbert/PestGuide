@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="cn.edu.bupt.lab805.pestguide">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".application.MyApplication"
@@ -11,24 +15,49 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoToolbar"
+        tools:replace="android:theme">
         <activity
             android:name=".activity.MainActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".activity.SplashActivity">
+        <activity
+            android:name=".activity.SplashActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PestdetailActivity" />
-        <activity android:name=".activity.FactoryActivity" />
-        <activity android:name=".activity.DepotActivity" />
-        <activity android:name=".activity.DepotEditActivity"></activity>
+        <activity
+            android:name=".activity.PestdetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.FactoryActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.DepotActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.DepotEditActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.InnerPositionActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.DepotSelectorActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.PestSelectorActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
     </application>
 
 </manifest>

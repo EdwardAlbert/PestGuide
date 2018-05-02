@@ -16,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.activity.PestdetailActivity;
 import cn.edu.bupt.lab805.pestguide.adapter.PestBookAdapter;
@@ -28,6 +29,7 @@ public class BookFragment extends Fragment {
     private DBHelper dbHelper;
     private List<Pest> datas;
     private PestBookAdapter adapter;
+    private Unbinder unbinder;
 
     @BindView(R.id.rv_pest)
     RecyclerView rv;
@@ -49,7 +51,7 @@ public class BookFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_book, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         dbHelper = DBHelper.getInstance();
         datas = dbHelper.queryPestList();
         adapter = new PestBookAdapter(getActivity(), datas);
@@ -64,6 +66,12 @@ public class BookFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
 }

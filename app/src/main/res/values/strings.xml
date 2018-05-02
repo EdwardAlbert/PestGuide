@@ -77,4 +77,38 @@
     <string name="upload_fail">上传失败!</string>
     <string name="upload_success">上传成功!</string>
     <string name="uploading">数据上传中……</string>
+
+    <!--UploadFragment-->
+    <string name="depot_and_location">粮仓与位置</string>
+    <string name="depot_location">仓内位置</string>
+    <string name="required_text">必\n\n填</string>
+    <string name="pic_info">图片信息</string>
+    <string name="choose_pest_source">请选择害虫来源</string>
+    <string name="pest_info">害虫信息</string>
+    <string name="kind_and_num">虫种与数量</string>
+    <string name="tip_add_pest">点击左侧按钮\n添加害虫</string>
+    <string name="optional_text">选\n\n填</string>
+    <string name="location_info">位置信息</string>
+    <string name="lati_and_longi">经纬度</string>
+    <string name="longitude">经度</string>
+    <string name="latitude">纬度</string>
+    <string name="loc_unit">°</string>
+    <string name="envir_info">环境信息</string>
+    <string name="temper_and_humi">温湿度</string>
+    <string name="temperature">温度</string>
+    <string name="humidity">湿度</string>
+    <string name="temper_unit">℃</string>
+    <string name="humi_unit">%</string>
+
+    <!--InnerPositionActivity-->
+    <string name="inner_title">平房仓采集点示意图</string>
+    <string name="east">东</string>
+    <string name="west">西</string>
+    <string name="north">北</string>
+    <string name="south">南</string>
+
+    <!--PestSelectorActivity-->
+    <string name="kind">虫种</string>
+    <string name="num">数量</string>
+    <string name="pest_unit">头</string>
 </resources>

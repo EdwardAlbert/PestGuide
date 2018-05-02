@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView_showMessages"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/relativelayout_5">
+
+            <ImageButton
+                android:id="@+id/upload_btn_depot"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/selector_upload_depot"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/upload_btn_depot"
+                android:layout_below="@+id/upload_btn_depot"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/depot_desc"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:id="@+id/upload_tv_lc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/upload_btn_depot"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@+id/upload_btn_depot"
+                android:gravity="left"
+                android:text="@string/depot_and_location"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <ImageView
+                android:id="@+id/img_lcbm"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/upload_tv_lc"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/upload_btn_depot"
+                android:src="@mipmap/upload_depottype" />
+
+            <TextView
+                android:id="@+id/upload_tv_lcmc"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/img_lcbm"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/img_lcbm"
+                android:gravity="center"
+                android:hint="@string/depot_name"
+                android:inputType="number"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <ImageView
+                android:id="@+id/img_position_upload"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/img_lcbm"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/upload_btn_depot"
+                android:src="@mipmap/upload_capacity" />
+
+
+            <TextView
+                android:id="@+id/upload_tv_position"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/img_position_upload"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/img_position_upload"
+                android:gravity="center"
+                android:hint="@string/depot_location"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/required_text"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_small" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/relativelayout_1">
+
+            <ImageButton
+                android:id="@+id/upload_btn_picture"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/selector_upload_picture"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/upload_btn_picture"
+                android:layout_below="@+id/upload_btn_picture"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/pic_info"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <ImageView
+                android:id="@+id/img_pest_source_upload"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/upload_im_image"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/upload_btn_picture"
+                android:src="@mipmap/pest_source" />
+
+            <ImageView
+                android:id="@+id/upload_im_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="85dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/upload_btn_picture"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/upload_picture_default" />
+
+            <Spinner
+                android:id="@+id/sp_pest_source_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/upload_im_image"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="65dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/upload_btn_picture"
+                android:entries="@array/pestsource"
+                android:gravity="center"
+                android:prompt="@string/choose_pest_source"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/required_text"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_small" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/relativelayout_2">
+
+            <LinearLayout
+                android:id="@+id/layout_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/upload_btn_pest"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/selector_upload_type"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/upload_btn_pest"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="@string/pest_info"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_size_body" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_kind_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/layout_upload"
+                android:gravity="left"
+                android:text="@string/kind_and_num"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_upload"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_kind_upload"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_toRightOf="@+id/layout_upload"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/tv_tips_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tv_kind_upload"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:hint="@string/tip_add_pest"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/optional_text"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_small" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/relativelayout_3">
+
+            <ImageButton
+                android:id="@+id/upload_btn_location"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/selector_upload_location"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/upload_btn_location"
+                android:layout_below="@+id/upload_btn_location"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/location_info"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:id="@+id/tv_jingdu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/upload_btn_location"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@+id/upload_btn_location"
+                android:gravity="left"
+                android:text="@string/lati_and_longi"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <ImageView
+                android:id="@+id/img_jingdu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_jingdu"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/upload_btn_location"
+                android:src="@mipmap/upload_compas" />
+
+            <ImageView
+                android:id="@+id/img_weidu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/img_jingdu"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/upload_btn_location"
+                android:src="@mipmap/upload_compas" />
+
+            <TextView
+                android:id="@+id/upload_tv_longtitude"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/img_jingdu"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/img_jingdu"
+                android:gravity="center"
+                android:hint="@string/longitude"
+                android:inputType="none"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:id="@+id/upload_tv_latitude"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/img_weidu"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/img_weidu"
+                android:gravity="center"
+                android:hint="@string/latitude"
+                android:inputType="none"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/upload_tv_longtitude"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/upload_tv_longtitude"
+                android:gravity="left"
+                android:text="@string/loc_unit"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/upload_tv_latitude"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/upload_tv_latitude"
+                android:gravity="left"
+                android:text="@string/loc_unit"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/optional_text"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_small" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/relativelayout_4">
+
+            <ImageButton
+                android:id="@+id/upload_btn_envir"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/selector_upload_envir"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/upload_btn_envir"
+                android:layout_below="@+id/upload_btn_envir"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/envir_info"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:id="@+id/tv_wendu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/upload_btn_envir"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@+id/upload_btn_envir"
+                android:gravity="left"
+                android:text="@string/temper_and_humi"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <ImageView
+                android:id="@+id/img_wendu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_wendu"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/upload_btn_envir"
+                android:src="@mipmap/upload_sun" />
+
+            <ImageView
+                android:id="@+id/img_shidu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/img_wendu"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/upload_btn_envir"
+                android:src="@mipmap/upload_water" />
+
+            <EditText
+                android:id="@+id/tv_tem_upload"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/img_wendu"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/img_wendu"
+                android:background="@drawable/input_y"
+                android:gravity="center"
+                android:hint="@string/temperature"
+                android:inputType="number"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <EditText
+                android:id="@+id/tv_hum_upload"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/img_shidu"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/img_shidu"
+                android:background="@drawable/input_y"
+                android:gravity="center"
+                android:hint="@string/humidity"
+                android:inputType="number"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_tem_upload"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tv_tem_upload"
+                android:gravity="left"
+                android:text="@string/temper_unit"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_hum_upload"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tv_hum_upload"
+                android:gravity="left"
+                android:text="@string/humi_unit"
+                android:textColor="@color/text_color"
+                android:textSize="@dimen/text_size_body" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:text="@string/optional_text"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_small" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/upload_btn_submit"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/selector_button_main"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_body" />
+    </LinearLayout>
+
+
+</ScrollView>

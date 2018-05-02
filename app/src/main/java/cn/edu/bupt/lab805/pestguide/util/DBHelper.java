@@ -141,6 +141,16 @@ public class DBHelper {
     }
 
     /**
+     * 根据害虫名称模糊查询
+     *
+     * @param name
+     * @return
+     */
+    public List<Pest> queryPestBySearch(String name) {
+        return pestDao.queryBuilder().where(PestDao.Properties.Name.like("%" + name + "%")).list();
+    }
+
+    /**
      * 根据ID获取pest
      *
      * @param id
@@ -180,29 +190,32 @@ public class DBHelper {
 
     /**
      * 获取粮仓列表
+     *
      * @return
      */
-    public List<Depot> queryDepotList(){
+    public List<Depot> queryDepotList() {
         return depotDao.queryBuilder().list();
     }
 
     /**
      * 插入粮仓信息
+     *
      * @param list
      */
-    public void insertDepotList(List<Depot> list){
+    public void insertDepotList(List<Depot> list) {
         depotDao.insertInTx(list);
     }
 
     /**
      * 删除所有粮仓
      */
-    public void deleteAllDepot(){
+    public void deleteAllDepot() {
         depotDao.deleteAll();
     }
 
     /**
      * 通过粮仓编码查询粮仓
+     *
      * @param lcbm
      * @return
      */
@@ -212,21 +225,23 @@ public class DBHelper {
 
     /**
      * 插入粮情信息
+     *
      * @param grain
      */
-    public void insertGrain(Grain grain){
+    public void insertGrain(Grain grain) {
         grainDao.insert(grain);
     }
 
     /**
      * 根据粮仓编码查询粮情
+     *
      * @param lcbm
      * @return
      */
-    public Grain queryGrainByLCBM(String lcbm){
-        try{
+    public Grain queryGrainByLCBM(String lcbm) {
+        try {
             return grainDao.queryBuilder().where(GrainDao.Properties.Lcbm.eq(lcbm)).unique();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -234,10 +249,11 @@ public class DBHelper {
 
     /**
      * 根据粮仓编码删除粮情
+     *
      * @param lcbm
      * @return
      */
-    public void deleteGrainByLCBM(String lcbm){
+    public void deleteGrainByLCBM(String lcbm) {
         List<Grain> list = grainDao.queryBuilder().where(GrainDao.Properties.Lcbm.eq(lcbm)).list();
         grainDao.deleteInTx(list);
     }

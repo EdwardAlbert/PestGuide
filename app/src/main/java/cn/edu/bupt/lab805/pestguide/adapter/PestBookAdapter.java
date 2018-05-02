@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -65,13 +66,20 @@ public class PestBookAdapter extends RecyclerView.Adapter<PestBookAdapter.ViewHo
                 break;
         }
         String path = "file:///android_asset/"+datas.get(position).getPictureurl();
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.mipmap.default_select_image);
         Glide.with(context).load(path)
-                .placeholder(R.mipmap.default_select_image).into(holder.pestIcon);
+                .apply(options).into(holder.pestIcon);
     }
 
     @Override
     public int getItemCount() {
         return datas == null ? 0 : datas.size();
+    }
+
+    public void setDatas(List<Pest> datas){
+        this.datas = datas;
+        notifyDataSetChanged();
     }
 
     public interface OnItemClickListener{

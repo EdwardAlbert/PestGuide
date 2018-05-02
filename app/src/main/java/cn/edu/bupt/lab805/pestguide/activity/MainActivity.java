@@ -1,15 +1,19 @@
 package cn.edu.bupt.lab805.pestguide.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
+import com.luck.picture.lib.config.PictureConfig;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,10 +21,12 @@ import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.application.MyApplication;
 import cn.edu.bupt.lab805.pestguide.bean.TabEntity;
 import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
+import cn.edu.bupt.lab805.pestguide.entity.Upload;
 import cn.edu.bupt.lab805.pestguide.fragment.BookFragment;
 import cn.edu.bupt.lab805.pestguide.fragment.DepotFrament;
 import cn.edu.bupt.lab805.pestguide.fragment.MeFragment;
 import cn.edu.bupt.lab805.pestguide.fragment.SimpleCardFragment;
+import cn.edu.bupt.lab805.pestguide.fragment.UploadFragment;
 import cn.edu.bupt.lab805.pestguide.util.DBHelper;
 import cn.edu.bupt.lab805.pestguide.util.DataUtil;
 import io.reactivex.disposables.Disposable;
@@ -60,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         toolbar.setTitle(getString(R.string.app_name));
         mTitles = getResources().getStringArray(R.array.fragment_title);
-        fragments.add(SimpleCardFragment.getInstance("Switch ViewPager " + mTitles[0]));
+        fragments.add(UploadFragment.newInstance());
         fragments.add(DepotFrament.newInstance());
         fragments.add(BookFragment.newInstance());
         fragments.add(MeFragment.newInstance());
@@ -77,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = DBHelper.getInstance();
         logininfo = dbHelper.queryLogininfo();
         dataUtil = DataUtil.getInstance();
-        dataUtil.syncFactory(logininfo.getUsername(),logininfo.getPassword());
-        dataUtil.syncUser(logininfo.getUsername(),logininfo.getPassword());
-        dataUtil.syncDepot(logininfo.getUsername(),logininfo.getPassword());
+        dataUtil.syncFactory(logininfo.getUsername(), logininfo.getPassword());
+        dataUtil.syncUser(logininfo.getUsername(), logininfo.getPassword());
+        dataUtil.syncDepot(logininfo.getUsername(), logininfo.getPassword());
     }
 
 }

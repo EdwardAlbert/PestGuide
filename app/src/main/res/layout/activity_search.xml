@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="cn.edu.bupt.lab805.pestguide.activity.SearchActivity">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/search_search_value"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:background="@drawable/search_text_value"
+            android:gravity="center"
+            android:hint="@string/request_for_pest_name"
+            android:textSize="@dimen/text_size_body" />
+
+        <ImageView
+            android:id="@+id/search_search_key"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:background="@drawable/search_text_key"
+            android:src="@mipmap/book_search" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/search_btn_s1"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/selector_btn_pestselect"
+            android:gravity="center"
+            android:text="米象"
+            android:textColor="#3BADA8"
+            android:textSize="@dimen/text_size_body" />
+
+
+        <Button
+            android:id="@+id/search_btn_s2"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/selector_btn_pestselect"
+            android:gravity="center"
+            android:text="谷盗"
+            android:textColor="#3BADA8"
+            android:textSize="@dimen/text_size_body" />
+
+        <Button
+            android:id="@+id/search_btn_s3"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/selector_btn_pestselect"
+            android:gravity="center"
+            android:text="谷蠹"
+            android:textColor="#3BADA8"
+            android:textSize="@dimen/text_size_body" />
+
+        <Button
+            android:id="@+id/search_btn_s4"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/selector_btn_pestselect"
+            android:gravity="center"
+            android:text="其他"
+            android:textColor="#3BADA8"
+            android:textSize="@dimen/text_size_body" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/search_tv_caution"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="@string/pest_not_found"
+        android:visibility="gone" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_lv_pest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/white" />
+
+</LinearLayout>
