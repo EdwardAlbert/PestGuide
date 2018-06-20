@@ -5,14 +5,17 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,13 +25,20 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.baidu.location.BDAbstractLocationListener;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.Poi;
 import com.bumptech.glide.Glide;
+import com.google.gson.JsonObject;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
-import java.io.Serializable;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,10 +50,20 @@ import cn.edu.bupt.lab805.pestguide.activity.DepotSelectorActivity;
 import cn.edu.bupt.lab805.pestguide.activity.InnerPositionActivity;
 import cn.edu.bupt.lab805.pestguide.activity.PestSelectorActivity;
 import cn.edu.bupt.lab805.pestguide.adapter.UploadRVAdapter;
+import cn.edu.bupt.lab805.pestguide.application.MyApplication;
 import cn.edu.bupt.lab805.pestguide.bean.RealInsects;
+import cn.edu.bupt.lab805.pestguide.entity.City;
 import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
+import cn.edu.bupt.lab805.pestguide.service.LocationService;
+import cn.edu.bupt.lab805.pestguide.util.Api;
 import cn.edu.bupt.lab805.pestguide.util.DBHelper;
 import cn.edu.bupt.lab805.pestguide.widget.MyItemAnimator;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -51,11 +71,12 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "UploadFragment";
 
-    private static final int REQUEST_IMAGE = 10;
-    public static final int REQUEST_TYPE = 30;
-    public static final int REQUEST_DEPOT = 40;
-    public static final int REQUEST_POSITION = 50;
-    private static final int REQUEST_PERMISSION = 60;
+    private static final int REQUEST_IMAGE = 1;
+    private static final int REQUEST_TYPE = 2;
+    private static final int REQUEST_DEPOT = 3;
+    private static final int REQUEST_POSITION = 4;
+    private static final int REQUEST_PERMISSION = 5;
+    private static final int DISTRICT_SUCCESS = 6;
 
     @BindView(R.id.upload_btn_depot)
     ImageButton depotButton;
@@ -81,10 +102,22 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     EditText temEdit;
     @BindView(R.id.tv_hum_upload)
     EditText humEdit;
+    @BindView(R.id.upload_btn_location)
+    ImageView locationButton;
+    @BindView(R.id.upload_tv_longtitude)
+    TextView longitudeText;
+    @BindView(R.id.upload_tv_latitude)
+    TextView latitudeText;
+    @BindView(R.id.upload_btn_envir)
     ImageButton envirButton;
     Button submitButton;
 
     private Unbinder unbinder;
+    //定位相关
+    private LocationService locationService;
+    private boolean isLocationBtnClick = false;
+    private boolean isEnvirBtnClick = false;
+    private DecimalFormat df = new DecimalFormat("###.000000");
 
     private String lcbm; //保存粮仓编码
     private String photoPath; //保存照片路径
@@ -92,6 +125,8 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     private UploadRVAdapter adapter;//害虫列表adapter
     private DBHelper dbHelper;
     private Logininfo logininfo;
+
+    private String cityID = null;
 
     public UploadFragment() {
         // Required empty public constructor
@@ -161,7 +196,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                         REQUEST_POSITION);
                 break;
             case R.id.upload_btn_picture:
-                checkPermissions();
+                checkPhotoPermissions();
                 break;
             case R.id.upload_btn_pest:
                 Intent intent = new Intent(getActivity(), PestSelectorActivity.class);
@@ -172,9 +207,86 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     }
 
     /**
-     * 检查权限
+     * 检查定位权限
      */
-    private void checkPermissions() {
+    private void checkLocPermissions() {
+
+    }
+
+    // 定位相关
+    @Override
+    public void onStop() {
+        // TODO Auto-generated method stub
+        locationService.unregisterListener(mListener); //注销掉监听
+        locationService.stop(); //停止定位服务
+        super.onStop();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
+        locationService = MyApplication.getInstance().locationService;
+        // 注册监听
+        locationService.registerListener(mListener);
+        locationService.setLocationOption(locationService
+                .getDefaultLocationClientOption());
+
+        locationButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (!locationService.isStart()) {
+                    Log.d(TAG, "onClick: 开始定位");
+                    isLocationBtnClick = true;
+                    locationService.start(); // 定位SDK
+                }
+            }
+        });
+        envirButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!TextUtils.isEmpty(cityID)) {
+                    getWheather(cityID);
+                } else if (!locationService.isStart()) {
+                    isEnvirBtnClick = true;
+                    locationService.start(); // 定位SDK
+                }
+            }
+        });
+    }
+
+    /*****
+     *
+     * 定位结果回调，重写onReceiveLocation方法，可以直接拷贝如下代码到自己工程中修改
+     *
+     */
+    private BDAbstractLocationListener mListener = new BDAbstractLocationListener() {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // TODO Auto-generated method stub
+            if (null != location && location.getLocType() != BDLocation.TypeServerError) {
+                if (isLocationBtnClick){
+                    latitudeText.setText(df.format(location.getLatitude()));
+                    longitudeText.setText(df.format(location.getLongitude()));
+                    isLocationBtnClick = false;
+                }else if(isEnvirBtnClick){
+                    cityID = dbHelper.queryCityID(location.getCity(),location.getDistrict());
+                    isEnvirBtnClick = false;
+                    getWheather(cityID);
+                }
+
+            }
+        }
+
+    };
+
+
+    /**
+     * 检查拍照权限
+     */
+    private void checkPhotoPermissions() {
         boolean CAMERA = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED;
         boolean READ_EXTERNAL_STORAGE = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED;
         boolean WRITE_EXTERNAL_STORAGE = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED;
@@ -244,4 +356,37 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    /**
+     * 获取温度和湿度
+     *
+     * @param cityID
+     */
+    private void getWheather(String cityID) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://www.weather.com.cn/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        Api api = retrofit.create(Api.class);
+        api.getWheather(cityID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ResponseBody>() {
+                    @Override
+                    public void accept(ResponseBody body) throws Exception {
+                        if (body != null) {
+                            String res = body.string();
+                            if (!TextUtils.isEmpty(res)) {
+                                JSONObject object = new JSONObject(res);
+                                JSONObject obj = object.getJSONObject("weatherinfo");
+                                String temp = obj.getString("temp");
+                                String sd = obj.getString("SD");
+                                temEdit.setText(temp);
+                                humEdit.setText(sd.substring(0, sd.length() - 1));
+                            }
+                        }
+                    }
+                });
+    }
+
 }

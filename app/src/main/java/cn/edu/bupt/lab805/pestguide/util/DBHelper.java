@@ -1,6 +1,7 @@
 package cn.edu.bupt.lab805.pestguide.util;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import cn.edu.bupt.lab805.pestguide.dao.PestDao;
 import cn.edu.bupt.lab805.pestguide.dao.TRealInsectsDao;
 import cn.edu.bupt.lab805.pestguide.dao.UploadDao;
 import cn.edu.bupt.lab805.pestguide.dao.UserDao;
+import cn.edu.bupt.lab805.pestguide.entity.City;
 import cn.edu.bupt.lab805.pestguide.entity.Depot;
 import cn.edu.bupt.lab805.pestguide.entity.Factory;
 import cn.edu.bupt.lab805.pestguide.entity.Grain;
@@ -256,5 +258,28 @@ public class DBHelper {
     public void deleteGrainByLCBM(String lcbm) {
         List<Grain> list = grainDao.queryBuilder().where(GrainDao.Properties.Lcbm.eq(lcbm)).list();
         grainDao.deleteInTx(list);
+    }
+
+    /**
+     * 通过城市和地区查询cityID
+     *
+     * @param city
+     * @param district
+     * @return
+     */
+    public String queryCityID(String city, String district) {
+        List<City> cities = null;
+        if (!TextUtils.isEmpty(district) && !TextUtils.isEmpty(city)) {
+            cities = cityDao.queryBuilder()
+                    .where(CityDao.Properties.Name.like("%" + district.substring(0, district.length() - 1) + "%"),
+                            CityDao.Properties.Parent.like("%" + city.substring(0, city.length() - 1) + "%")).list();
+            if (cities.size()!=0) return cities.get(0).getPosID();
+        }
+        if (!TextUtils.isEmpty(city)){
+            cities = cityDao.queryBuilder()
+                    .where(CityDao.Properties.Parent.like("%" + city.substring(0, city.length() - 1) + "%")).list();
+            if (cities.size()!=0) return cities.get(0).getPosID();
+        }
+        return null;
     }
 }

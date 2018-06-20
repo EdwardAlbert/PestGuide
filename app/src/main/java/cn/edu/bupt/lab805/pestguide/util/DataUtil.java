@@ -90,7 +90,9 @@ public class DataUtil {
     /**
      * 获取粮仓信息
      */
-    public void syncDepot(final String username, final String password) {
+    public void syncDepot(String username, String password) {
+        final String user = username;
+        final String pw = password;
         Api api = MyApplication.getInstance().getApi();
         try {
             api.getDepot(username, password, 1, 10)
@@ -107,7 +109,7 @@ public class DataUtil {
                                 }
                                 if (page.getTotalPages() > 1) {
                                     for (int i = 2; i <= page.getTotalPages(); i++)
-                                        getDepotByPage(username, password, i);
+                                        getDepotByPage(user, pw, i);
                                 }
                             }
                         }

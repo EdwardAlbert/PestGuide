@@ -10,9 +10,12 @@ import cn.edu.bupt.lab805.pestguide.entity.Factory;
 import cn.edu.bupt.lab805.pestguide.entity.Grain;
 import cn.edu.bupt.lab805.pestguide.entity.User;
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by zby on 2017/12/1.
@@ -46,7 +49,10 @@ public interface Api {
     @FormUrlEncoded
     Observable<Result> uploadGrain(@Field("username") String username, @Field("password") String password,
                                    @Field("lcbm") String lcbm, @Field("grainname") String grainname,
-                                   @Field("source") String source,@Field("clxs") String clxs,
+                                   @Field("source") String source, @Field("clxs") String clxs,
                                    @Field("innum") Integer innum, @Field("indate") String indate,
                                    @Field("harvestdate") String harvestdate, @Field("reserveperiod") Integer reserveperiod);
+
+    @GET("data/sk/{id}.html")
+    Observable<ResponseBody> getWheather(@Path("id") String cityId);
 }

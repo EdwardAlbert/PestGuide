@@ -1,16 +1,18 @@
 package cn.edu.bupt.lab805.pestguide.application;
 
 import android.app.Application;
+import android.app.Service;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Vibrator;
 
 import cn.edu.bupt.lab805.pestguide.dao.DaoMaster;
 import cn.edu.bupt.lab805.pestguide.dao.DaoSession;
+import cn.edu.bupt.lab805.pestguide.service.LocationService;
 import cn.edu.bupt.lab805.pestguide.util.Api;
 import cn.edu.bupt.lab805.pestguide.util.JsonUtils;
 import cn.edu.bupt.lab805.pestguide.util.UrlContainer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 /**
@@ -28,6 +30,9 @@ public class MyApplication extends Application {
     //网络连接
     private Retrofit retrofit;
     private Api api;
+    //定位
+    public LocationService locationService;
+    public Vibrator mVibrator;
 
     @Override
     public void onCreate() {
@@ -41,12 +46,18 @@ public class MyApplication extends Application {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         api = retrofit.create(Api.class);
+
+        locationService = new LocationService(getApplicationContext());
+        mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
     }
 
     public static MyApplication getInstance() {
         return mInstance;
     }
 
+    public LocationService getLocationService() {
+        return locationService;
+    }
 
     /**
      * 获取Api对象
