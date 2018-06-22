@@ -5,8 +5,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -15,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -27,10 +24,7 @@ import android.widget.TextView;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.Poi;
 import com.bumptech.glide.Glide;
-import com.google.gson.JsonObject;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -52,7 +46,6 @@ import cn.edu.bupt.lab805.pestguide.activity.PestSelectorActivity;
 import cn.edu.bupt.lab805.pestguide.adapter.UploadRVAdapter;
 import cn.edu.bupt.lab805.pestguide.application.MyApplication;
 import cn.edu.bupt.lab805.pestguide.bean.RealInsects;
-import cn.edu.bupt.lab805.pestguide.entity.City;
 import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
 import cn.edu.bupt.lab805.pestguide.service.LocationService;
 import cn.edu.bupt.lab805.pestguide.util.Api;
@@ -75,8 +68,8 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     private static final int REQUEST_TYPE = 2;
     private static final int REQUEST_DEPOT = 3;
     private static final int REQUEST_POSITION = 4;
-    private static final int REQUEST_PERMISSION = 5;
-    private static final int DISTRICT_SUCCESS = 6;
+    private static final int PERMISSION_CAMERA = 5;
+    private static final int PERMISSION_LOC = 6;
 
     @BindView(R.id.upload_btn_depot)
     ImageButton depotButton;
@@ -117,7 +110,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     private LocationService locationService;
     private boolean isLocationBtnClick = false;
     private boolean isEnvirBtnClick = false;
-    private DecimalFormat df = new DecimalFormat("###.000000");
+    private DecimalFormat df = new DecimalFormat("###.00");
 
     private String lcbm; //保存粮仓编码
     private String photoPath; //保存照片路径
@@ -206,13 +199,6 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    /**
-     * 检查定位权限
-     */
-    private void checkLocPermissions() {
-
-    }
-
     // 定位相关
     @Override
     public void onStop() {
@@ -236,22 +222,18 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onClick(View v) {
-                if (!locationService.isStart()) {
-                    Log.d(TAG, "onClick: 开始定位");
-                    isLocationBtnClick = true;
-                    locationService.start(); // 定位SDK
-                }
+//                Log.d(TAG, "onClick: 开始定位");
+                isLocationBtnClick = true;
+                isEnvirBtnClick  = false;
+                checkLocPermissions();
             }
         });
         envirButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(cityID)) {
-                    getWheather(cityID);
-                } else if (!locationService.isStart()) {
-                    isEnvirBtnClick = true;
-                    locationService.start(); // 定位SDK
-                }
+                isLocationBtnClick = false;
+                isEnvirBtnClick  = true;
+                checkLocPermissions();
             }
         });
     }
@@ -267,12 +249,13 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
         public void onReceiveLocation(BDLocation location) {
             // TODO Auto-generated method stub
             if (null != location && location.getLocType() != BDLocation.TypeServerError) {
-                if (isLocationBtnClick){
+                if (isLocationBtnClick) {
+//                    Log.d(TAG, "onReceiveLocation: " + location.getDistrict());
                     latitudeText.setText(df.format(location.getLatitude()));
                     longitudeText.setText(df.format(location.getLongitude()));
                     isLocationBtnClick = false;
-                }else if(isEnvirBtnClick){
-                    cityID = dbHelper.queryCityID(location.getCity(),location.getDistrict());
+                } else if (isEnvirBtnClick) {
+                    cityID = dbHelper.queryCityID(location.getCity(), location.getDistrict());
                     isEnvirBtnClick = false;
                     getWheather(cityID);
                 }
@@ -293,11 +276,41 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
         if (CAMERA || READ_EXTERNAL_STORAGE || WRITE_EXTERNAL_STORAGE) {
             requestPermissions(new String[]{Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_CAMERA);
 
         } else {
             getPhoto();
         }
+    }
+
+    /**
+     * 检查定位权限
+     */
+    private void checkLocPermissions() {
+        int permission = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                | ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                | ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_WIFI_STATE)
+                | ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_NETWORK_STATE)
+                | ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CHANGE_WIFI_STATE)
+                | ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE);
+        if (permission != 0) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_WIFI_STATE,
+                    Manifest.permission.ACCESS_NETWORK_STATE,
+                    Manifest.permission.CHANGE_WIFI_STATE,
+                    Manifest.permission.READ_PHONE_STATE}, PERMISSION_LOC);
+
+        } else {
+            gotoLoc();
+        }
+    }
+
+    /**
+     * 定位
+     */
+    private void gotoLoc(){
+        locationService.start();
     }
 
     /**
@@ -311,6 +324,8 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                 .previewImage(true) //是否可以预览图片
                 .forResult(PictureConfig.CHOOSE_REQUEST);
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -342,12 +357,20 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_PERMISSION) {
-            if (grantResults.length == 3 && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
-                getPhoto();
-            }
+        switch (requestCode) {
+            case PERMISSION_LOC:
+                if (grantResults.length == 6 &&
+                        (grantResults[0] | grantResults[1] | grantResults[2] | grantResults[3] | grantResults[4] | grantResults[5]) == 0) {
+                    gotoLoc();
+                }
+                break;
+            case PERMISSION_CAMERA:
+                if (grantResults.length == 3 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[2] == PackageManager.PERMISSION_GRANTED) {
+                    getPhoto();
+                }
+                break;
         }
     }
 
@@ -363,6 +386,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
      * @param cityID
      */
     private void getWheather(String cityID) {
+        if (TextUtils.isEmpty(cityID)) return;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://www.weather.com.cn/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
