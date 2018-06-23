@@ -9,7 +9,7 @@ public class Result<T> {
     private T t;
     private Type type;
     private String content;
-    private Integer id;
+    private Long id;
     private String url;
 
     public T getT() {
@@ -36,11 +36,11 @@ public class Result<T> {
         this.content = content;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -27,6 +27,9 @@ public class Data {
     private String note;
     private List<RealInsects> realInsects;
 
+    public Data() {
+    }
+
     public Data(Float temperature, Float humidity, Integer x, Double longtitude, Double latitude,
                 String collecttime, String source, String trapsource, List<RealInsects> realInsects) {
         this.temperature = temperature;

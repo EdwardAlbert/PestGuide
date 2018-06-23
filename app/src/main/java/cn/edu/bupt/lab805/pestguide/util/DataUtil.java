@@ -172,4 +172,8 @@ public class DataUtil {
             e.printStackTrace();
         }
     }
+
+    public void upload(String username,String password,String lcbm){
+
+    }
 }

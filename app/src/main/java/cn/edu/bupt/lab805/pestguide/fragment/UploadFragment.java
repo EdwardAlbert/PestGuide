@@ -2,10 +2,12 @@ package cn.edu.bupt.lab805.pestguide.fragment;
 
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,9 +34,14 @@ import com.luck.picture.lib.entity.LocalMedia;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,15 +52,26 @@ import cn.edu.bupt.lab805.pestguide.activity.InnerPositionActivity;
 import cn.edu.bupt.lab805.pestguide.activity.PestSelectorActivity;
 import cn.edu.bupt.lab805.pestguide.adapter.UploadRVAdapter;
 import cn.edu.bupt.lab805.pestguide.application.MyApplication;
+import cn.edu.bupt.lab805.pestguide.bean.Data;
 import cn.edu.bupt.lab805.pestguide.bean.RealInsects;
+import cn.edu.bupt.lab805.pestguide.bean.RealTimeData;
+import cn.edu.bupt.lab805.pestguide.bean.Result;
+import cn.edu.bupt.lab805.pestguide.bean.Type;
 import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
+import cn.edu.bupt.lab805.pestguide.entity.User;
 import cn.edu.bupt.lab805.pestguide.service.LocationService;
 import cn.edu.bupt.lab805.pestguide.util.Api;
 import cn.edu.bupt.lab805.pestguide.util.DBHelper;
+import cn.edu.bupt.lab805.pestguide.util.JsonUtils;
 import cn.edu.bupt.lab805.pestguide.widget.MyItemAnimator;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -103,7 +121,10 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     TextView latitudeText;
     @BindView(R.id.upload_btn_envir)
     ImageButton envirButton;
+    @BindView(R.id.upload_btn_submit)
     Button submitButton;
+
+    private ProgressDialog progressDialog;
 
     private Unbinder unbinder;
     //定位相关
@@ -113,6 +134,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     private DecimalFormat df = new DecimalFormat("###.00");
 
     private String lcbm; //保存粮仓编码
+    private String pos; //保存仓内位置
     private String photoPath; //保存照片路径
     private ArrayList<RealInsects> realInsectsList = new ArrayList<>();//害虫种类和数量
     private UploadRVAdapter adapter;//害虫列表adapter
@@ -147,6 +169,11 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initViews() {
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setMessage(getString(R.string.uploading));
+
         //粮仓按钮
         depotButton.setOnClickListener(this);
         lcmcText.setOnClickListener(this);
@@ -157,6 +184,8 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
         pictureButton.setOnClickListener(this);
         //选择害虫种类和数量
         pestButton.setOnClickListener(this);
+        //提交按钮
+        submitButton.setOnClickListener(this);
         adapter = new UploadRVAdapter(getActivity(), realInsectsList);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv.setItemAnimator(new MyItemAnimator());
@@ -196,6 +225,9 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                 intent.putParcelableArrayListExtra("RealInsectsList", realInsectsList);
                 startActivityForResult(intent, REQUEST_TYPE);
                 break;
+            case R.id.upload_btn_submit:
+                checkSubmit();
+                break;
         }
     }
 
@@ -224,7 +256,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
 //                Log.d(TAG, "onClick: 开始定位");
                 isLocationBtnClick = true;
-                isEnvirBtnClick  = false;
+                isEnvirBtnClick = false;
                 checkLocPermissions();
             }
         });
@@ -232,7 +264,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 isLocationBtnClick = false;
-                isEnvirBtnClick  = true;
+                isEnvirBtnClick = true;
                 checkLocPermissions();
             }
         });
@@ -265,6 +297,43 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
 
     };
 
+    /**
+     * 检查上传
+     */
+    private void checkSubmit() {
+        if (TextUtils.isEmpty(photoPath)) {
+            Snackbar.make(submitButton, getString(R.string.request_for_photo), Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(lcbm)) {
+            Snackbar.make(submitButton, getString(R.string.request_for_lcbm), Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(pos)) {
+            Snackbar.make(submitButton, getString(R.string.request_for_pos), Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
+        //封装数据
+        Data data = new Data();
+        data.setTemperature(Float.parseFloat(temEdit.getText().toString()));
+        data.setHumidity(Float.parseFloat(humEdit.getText().toString()));
+        data.setX(Integer.parseInt(pos));
+        data.setLongtitude(Double.parseDouble(longitudeText.getText().toString()));
+        data.setLatitude(Double.parseDouble(latitudeText.getText().toString()));
+        SimpleDateFormat sdf = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss");
+        data.setCollecttime(sdf.format(new Date()));
+        data.setSource("App");
+        data.setTrapsource(spTrapSource.getSelectedItem().toString());
+        data.setRealInsects(realInsectsList);
+
+        RealTimeData realTimeData = new RealTimeData(logininfo.getUsername(), lcbm, data);
+//        Log.d(TAG, "checkSubmit: " + JsonUtils.toJson(realTimeData));
+        progressDialog.show();
+        uploadData(realTimeData);
+
+    }
 
     /**
      * 检查拍照权限
@@ -309,7 +378,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     /**
      * 定位
      */
-    private void gotoLoc(){
+    private void gotoLoc() {
         locationService.start();
     }
 
@@ -326,7 +395,6 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -336,7 +404,8 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                     lcmcText.setText(data.getStringExtra("lcmc"));
                     break;
                 case REQUEST_POSITION:
-                    posText.setText(data.getIntExtra("position", 0) + "");
+                    pos = data.getIntExtra("position", 0) + "";
+                    posText.setText(pos);
                     break;
                 case PictureConfig.CHOOSE_REQUEST:
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
@@ -412,5 +481,127 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                     }
                 });
     }
+
+    /**
+     * 上传数据
+     *
+     * @param realTimeData
+     */
+    private void uploadData(RealTimeData realTimeData) {
+        Api api = MyApplication.getInstance().getApi();
+        api.uploadData(realTimeData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Result>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if (result != null && result.getType() == Type.success) {
+                            uploadPic(logininfo.getUsername(), result.getId(), photoPath);
+                        } else {
+                            Log.d(TAG, "onNext: data");
+                            progressDialog.dismiss();
+                            Snackbar.make(submitButton, getString(R.string.submit_failed), Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError: data");
+                        progressDialog.dismiss();
+                        Snackbar.make(submitButton, getString(R.string.submit_failed), Snackbar.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * 上传图片
+     *
+     * @param username
+     * @param id
+     * @param photoPath
+     */
+    private void uploadPic(String username, Long id, String photoPath) {
+        Log.d(TAG, "uploadPic: " + username + " " + id);
+        Api api = MyApplication.getInstance().getApi();
+        api.uploadPic(getPartMap(photoPath, username, id.toString()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Result>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
+                        if (result != null && result.getType() == Type.success) {
+                            clearData();
+                            Snackbar.make(submitButton, getString(R.string.submit_success), Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            Log.d(TAG, "onNext: pic " + result.toString());
+                            Snackbar.make(submitButton, getString(R.string.submit_failed), Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        Log.d(TAG, "onError: pic");
+                        progressDialog.dismiss();
+                        Snackbar.make(submitButton, getString(R.string.submit_failed), Snackbar.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        progressDialog.dismiss();
+                    }
+                });
+    }
+
+    /**
+     * 封装数据和图片
+     *
+     * @param photoPath
+     * @param name
+     * @param cid
+     * @return
+     */
+    private Map<String, RequestBody> getPartMap(String photoPath, String name, String cid) {
+        Map<String, RequestBody> map = new HashMap<>();
+        //封装文本数据
+        MediaType textType = MediaType.parse("text/plain");
+        RequestBody username = RequestBody.create(textType, name);
+        RequestBody id = RequestBody.create(textType, cid);
+        map.put("username", username);
+        map.put("id", id);
+        //封装图片数据
+        File photo = new File(photoPath);
+        RequestBody file = RequestBody.create(MediaType.parse("image/jpg"), photo);
+        map.put("files\"; filename=\"" + photo.getName(), file);
+        return map;
+    }
+
+    /**
+     * 清除已上传的数据
+     */
+    public void clearData(){
+        pos = null;
+        posText.setText("");
+        lcbm = null;
+        lcmcText.setText("");
+        photoPath = null;
+        uploadImage.setImageResource(R.mipmap.upload_picture_default);
+    }
+
 
 }
