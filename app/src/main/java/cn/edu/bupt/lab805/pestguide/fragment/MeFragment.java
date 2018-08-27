@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -14,6 +13,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.activity.FactoryActivity;
+import cn.edu.bupt.lab805.pestguide.activity.SettingActivity;
+import cn.edu.bupt.lab805.pestguide.activity.UploadActivity;
 import cn.edu.bupt.lab805.pestguide.entity.Factory;
 import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
 import cn.edu.bupt.lab805.pestguide.entity.User;
@@ -83,6 +84,12 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.me_factory:
                 startActivity(new Intent(getActivity(), FactoryActivity.class));
+                break;
+            case R.id.me_set:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
+                break;
+            case R.id.me_mecheck:
+                startActivity(new Intent(getActivity(), UploadActivity.class));
                 break;
         }
     }

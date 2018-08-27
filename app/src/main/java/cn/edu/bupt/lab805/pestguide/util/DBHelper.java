@@ -282,4 +282,12 @@ public class DBHelper {
         }
         return null;
     }
+
+    /**
+     * 删除登录信息
+     */
+    public void deleteLogininfo() {
+        // TODO Auto-generated method stub
+        logininfoDao.deleteAll();
+    }
 }

@@ -105,6 +105,7 @@
     <string name="request_for_pos">请选择仓内拍摄位置！</string>
     <string name="submit_success">上传成功！</string>
     <string name="submit_failed">上传失败！</string>
+    <string name="weatherapi">http://weatherapi.market.xiaomi.com/</string>
 
     <!--InnerPositionActivity-->
     <string name="inner_title">平房仓采集点示意图</string>

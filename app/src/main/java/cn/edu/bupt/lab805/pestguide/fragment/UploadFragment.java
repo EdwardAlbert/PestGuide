@@ -291,8 +291,8 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                     isEnvirBtnClick = false;
                     getWheather(cityID);
                 }
-
             }
+            locationService.stop();
         }
 
     };
@@ -457,7 +457,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     private void getWheather(String cityID) {
         if (TextUtils.isEmpty(cityID)) return;
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.weather.com.cn/")
+                .baseUrl(getString(R.string.weatherapi))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         Api api = retrofit.create(Api.class);

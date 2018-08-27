@@ -5,28 +5,23 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
-import com.luck.picture.lib.config.PictureConfig;
 
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.bupt.lab805.pestguide.R;
-import cn.edu.bupt.lab805.pestguide.application.MyApplication;
 import cn.edu.bupt.lab805.pestguide.bean.TabEntity;
 import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
-import cn.edu.bupt.lab805.pestguide.entity.Upload;
 import cn.edu.bupt.lab805.pestguide.fragment.BookFragment;
 import cn.edu.bupt.lab805.pestguide.fragment.DepotFrament;
 import cn.edu.bupt.lab805.pestguide.fragment.MeFragment;
-import cn.edu.bupt.lab805.pestguide.fragment.SimpleCardFragment;
 import cn.edu.bupt.lab805.pestguide.fragment.UploadFragment;
+import cn.edu.bupt.lab805.pestguide.util.ActivityManager;
 import cn.edu.bupt.lab805.pestguide.util.DBHelper;
 import cn.edu.bupt.lab805.pestguide.util.DataUtil;
 import io.reactivex.disposables.Disposable;
@@ -58,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActivityManager.getInstance().addActivity(this);
         ButterKnife.bind(this);
         initdatas();
         initViews();
@@ -88,4 +84,11 @@ public class MainActivity extends AppCompatActivity {
         dataUtil.syncDepot(logininfo.getUsername(), logininfo.getPassword());
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }

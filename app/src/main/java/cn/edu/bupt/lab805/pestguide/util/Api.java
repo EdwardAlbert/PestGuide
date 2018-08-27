@@ -24,6 +24,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by zby on 2017/12/1.
@@ -61,8 +62,8 @@ public interface Api {
                                    @Field("innum") Integer innum, @Field("indate") String indate,
                                    @Field("harvestdate") String harvestdate, @Field("reserveperiod") Integer reserveperiod);
 
-    @GET("data/sk/{id}.html")
-    Observable<ResponseBody> getWheather(@Path("id") String cityId);
+    @GET("wtr-v2/temp/realtime")
+    Observable<ResponseBody> getWheather(@Query("cityId") String cityId);
 
     @POST("app/depot/realtimedata/addRealData")
     Observable<Result> uploadData(@Body RealTimeData realTimeData);
