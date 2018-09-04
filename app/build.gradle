@@ -77,6 +77,8 @@ dependencies {
     implementation files('libs/BaiduLBS_Android.jar')
     //加载更多列表
     implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
+    //radiobutton
+    implementation 'com.github.ceryle:RadioRealButton:v2.1.1'
 }
 
 //greenDAO

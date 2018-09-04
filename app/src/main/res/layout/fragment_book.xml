@@ -1,11 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:orientation="vertical"
     tools:context="cn.edu.bupt.lab805.pestguide.fragment.BookFragment">
 
     <LinearLayout
@@ -35,53 +36,70 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <co.ceryle.radiorealbutton.RadioRealButtonGroup
+        android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_margin="16dp"
+        android:elevation="1dp"
+        app:rrbg_animateTexts_enter="overshoot"
+        app:rrbg_animateTexts_enterDuration="500"
+        app:rrbg_backgroundColor="#fff"
+        app:rrbg_borderColor="@color/colorPrimaryDark"
+        app:rrbg_borderSize="2dp"
+        app:rrbg_bottomLineColor="@color/colorPrimaryDark"
+        app:rrbg_bottomLineRadius="2dp"
+        app:rrbg_bottomLineSize="0dp"
+        app:rrbg_buttonsPadding="5dp"
+        app:rrbg_checkedPosition="0"
+        app:rrbg_dividerColor="@color/colorPrimaryDark"
+        app:rrbg_dividerPadding="10dp"
+        app:rrbg_dividerRadius="1dp"
+        app:rrbg_dividerSize="2dp"
+        app:rrbg_radius="4dp"
+        app:rrbg_selectorAboveOfBottomLine="false"
+        app:rrbg_selectorBottom="true"
+        app:rrbg_selectorColor="@color/colorPrimaryDark"
+        app:rrbg_selectorRadius="1dp"
+        app:rrbg_selectorSize="6dp">
 
-        <Button
-            android:id="@+id/book_btn_beetle"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/button_pest_normal"
-            android:gravity="center"
-            android:text="@string/beetles"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_body" />
+        <co.ceryle.radiorealbutton.RadioRealButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rrb_rippleColor="@color/text_light_grey"
+            app:rrb_text="全部"
+            app:rrb_textColor="@color/colorPrimaryDark"
+            app:rrb_textSize="18sp" />
 
+        <co.ceryle.radiorealbutton.RadioRealButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rrb_rippleColor="@color/text_light_grey"
+            app:rrb_text="甲虫类"
+            app:rrb_textColor="@color/colorPrimaryDark"
+            app:rrb_textSize="18sp" />
 
-        <Button
-            android:id="@+id/book_btn_moth"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/button_pest_normal"
-            android:gravity="center"
-            android:text="@string/moth"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_body" />
+        <co.ceryle.radiorealbutton.RadioRealButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rrb_rippleColor="@color/text_light_grey"
+            app:rrb_text="蛾类"
+            app:rrb_textColor="@color/colorPrimaryDark"
+            app:rrb_textSize="18sp" />
 
-        <Button
-            android:id="@+id/book_btn_mite"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
-            android:background="@drawable/button_pest_normal"
-            android:gravity="center"
-            android:text="@string/mite"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_body" />
+        <co.ceryle.radiorealbutton.RadioRealButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rrb_rippleColor="@color/text_light_grey"
+            app:rrb_text="螨类"
+            app:rrb_textColor="@color/colorPrimaryDark"
+            app:rrb_textSize="18sp" />
 
-    </LinearLayout>
-
+    </co.ceryle.radiorealbutton.RadioRealButtonGroup>
     <TextView
         android:id="@+id/book_tv_caution"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="15dp"
         android:background="#FDFBF3"
         android:gravity="center"
         android:text="@string/pest_not_found"
@@ -94,6 +112,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>

@@ -163,6 +163,25 @@ public class DBHelper {
     }
 
     /**
+     * 根据类别查找害虫
+     *
+     * @param id
+     * @return
+     */
+    public List<Pest> queryPestByClassId(int id) {
+        switch (id) {
+            case 1:
+                return pestDao.queryBuilder().where(PestDao.Properties.Category.eq("甲虫类")).list();
+            case 2:
+                return pestDao.queryBuilder().where(PestDao.Properties.Category.eq("蛾类")).list();
+            case 3:
+                return pestDao.queryBuilder().where(PestDao.Properties.Category.eq("螨类")).list();
+            default:
+                return pestDao.queryBuilder().list();
+        }
+    }
+
+    /**
      * 获取粮库信息
      *
      * @return
@@ -273,12 +292,12 @@ public class DBHelper {
             cities = cityDao.queryBuilder()
                     .where(CityDao.Properties.Name.like("%" + district.substring(0, district.length() - 1) + "%"),
                             CityDao.Properties.Parent.like("%" + city.substring(0, city.length() - 1) + "%")).list();
-            if (cities.size()!=0) return cities.get(0).getPosID();
+            if (cities.size() != 0) return cities.get(0).getPosID();
         }
-        if (!TextUtils.isEmpty(city)){
+        if (!TextUtils.isEmpty(city)) {
             cities = cityDao.queryBuilder()
                     .where(CityDao.Properties.Parent.like("%" + city.substring(0, city.length() - 1) + "%")).list();
-            if (cities.size()!=0) return cities.get(0).getPosID();
+            if (cities.size() != 0) return cities.get(0).getPosID();
         }
         return null;
     }

@@ -388,9 +388,17 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
     private void getPhoto() {
         PictureSelector.create(this)
                 .openGallery(PictureMimeType.ofImage())
-                .maxSelectNum(1) //最大选择照片数量
+                .theme(R.style.picture_default_style)
                 .selectionMode(PictureConfig.SINGLE) //选择模式 单选
                 .previewImage(true) //是否可以预览图片
+                .enableCrop(true)
+                .hideBottomControls(false)
+                .showCropFrame(true)
+                .showCropGrid(true)
+                .previewEggs(true)
+                .rotateEnabled(true)
+                .scaleEnabled(true)
+                .freeStyleCropEnabled(true)
                 .forResult(PictureConfig.CHOOSE_REQUEST);
     }
 
@@ -409,7 +417,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                     break;
                 case PictureConfig.CHOOSE_REQUEST:
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-                    photoPath = selectList.get(0).getPath();
+                    photoPath = selectList.get(0).getCutPath();
                     Glide.with(getActivity()).load(photoPath).into(uploadImage);
                     break;
                 case REQUEST_TYPE:
