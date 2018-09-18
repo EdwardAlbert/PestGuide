@@ -21,7 +21,7 @@ import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.entity.Pest;
 import cn.edu.bupt.lab805.pestguide.util.DBHelper;
 
-public class PestdetailActivity extends AppCompatActivity {
+public class PestdetailActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "PestdetailActivity";
 
@@ -50,6 +50,7 @@ public class PestdetailActivity extends AppCompatActivity {
 
     private DBHelper dbHelper;
     private Pest pest;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +78,15 @@ public class PestdetailActivity extends AppCompatActivity {
             tv_importance.setVisibility(View.VISIBLE);
             tv_importance.setText(getString(R.string.importan));
         }
-        String path = "file:///android_asset/" + pest.getPictureurl();
-        File file = new File(path);
-        if (file.exists())
-            Log.d(TAG, "initViews: 图片路径 " + file.getAbsolutePath());
+        path = "file:///android_asset/" + pest.getPictureurl();
+//        File file = new File(path);
+//        if (file.exists())
+//            Log.d(TAG, "initViews: 图片路径 " + file.getAbsolutePath());
         RequestOptions options = new RequestOptions();
         options.placeholder(R.mipmap.default_select_image);
         Glide.with(this).load(path)
                 .apply(options).into(img_icon);
+        img_icon.setOnClickListener(this);
     }
 
     private void initDatas() {
@@ -102,5 +104,17 @@ public class PestdetailActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.detail_icon:
+                Intent intent = new Intent(this,ImageDetailActivity.class);
+                intent.putExtra("imgPath",path);
+                intent.putExtra("Class",getClass().getSimpleName());
+                startActivity(intent);
+                break;
+        }
     }
 }

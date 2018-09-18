@@ -48,6 +48,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.activity.DepotSelectorActivity;
+import cn.edu.bupt.lab805.pestguide.activity.ImageDetailActivity;
 import cn.edu.bupt.lab805.pestguide.activity.InnerPositionActivity;
 import cn.edu.bupt.lab805.pestguide.activity.PestSelectorActivity;
 import cn.edu.bupt.lab805.pestguide.adapter.UploadRVAdapter;
@@ -182,6 +183,7 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
         posText.setOnClickListener(this);
         //选择照片
         pictureButton.setOnClickListener(this);
+        uploadImage.setOnClickListener(this);
         //选择害虫种类和数量
         pestButton.setOnClickListener(this);
         //提交按钮
@@ -219,6 +221,14 @@ public class UploadFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.upload_btn_picture:
                 checkPhotoPermissions();
+                break;
+            case R.id.upload_im_image:
+                if(photoPath!=null){
+                    Intent intent = new Intent(getActivity(), ImageDetailActivity.class);
+                    intent.putExtra("imgPath",photoPath);
+                    intent.putExtra("Class",getClass().getSimpleName());
+                    startActivity(intent);
+                }
                 break;
             case R.id.upload_btn_pest:
                 Intent intent = new Intent(getActivity(), PestSelectorActivity.class);

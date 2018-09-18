@@ -8,10 +8,13 @@ import android.support.v4.app.ListFragment;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -31,7 +34,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
-public class BookFragment extends Fragment {
+public class BookFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "BookFragment";
 
     private DBHelper dbHelper;
@@ -45,6 +48,10 @@ public class BookFragment extends Fragment {
     RecyclerView rv;
     @BindView(R.id.radio_group)
     RadioRealButtonGroup radioGroup;
+    @BindView(R.id.book_search_value)
+    EditText etSearch;
+    @BindView(R.id.book_search_key)
+    ImageView searchButton;
 
     public BookFragment() {
     }
@@ -97,6 +104,7 @@ public class BookFragment extends Fragment {
                 updatePestList();
             }
         });
+        searchButton.setOnClickListener(this);
     }
 
     private void updatePestList() {
@@ -127,4 +135,16 @@ public class BookFragment extends Fragment {
         unbinder.unbind();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.book_search_key:
+                String searchStr = etSearch.getText().toString().trim();
+                if (!TextUtils.isEmpty(searchStr)) {
+                    newDatas = dbHelper.queryPestBySearch(searchStr);
+                    updatePestList();
+                }
+                break;
+        }
+    }
 }
