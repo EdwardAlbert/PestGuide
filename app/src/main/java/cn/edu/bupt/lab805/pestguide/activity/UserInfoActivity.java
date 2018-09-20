@@ -92,6 +92,7 @@ public class UserInfoActivity extends AppCompatActivity {
                         datas = result.getT();
                         adapter.setDatas(datas);
                         adapter.notifyDataSetChanged();
+                        smartRefreshLayout.finishRefresh(true);
                     }
                 });
     }

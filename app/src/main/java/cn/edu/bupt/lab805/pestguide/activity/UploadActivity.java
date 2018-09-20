@@ -132,7 +132,7 @@ public class UploadActivity extends AppCompatActivity {
                         datas.addAll(result.getT().getRows());
                         adapter.setDatas(datas);
                         adapter.notifyItemInserted(datas.size() - result.getT().getRows().size());
-                        smartRefreshLayout.finishLoadMore(true);
+                        smartRefreshLayout.finishLoadMore(500, true, false);
                     } else {
                         smartRefreshLayout.finishRefresh(false);
                     }
