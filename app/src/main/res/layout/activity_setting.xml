@@ -10,18 +10,6 @@
     <include layout="@layout/toolbar_layout"/>
 
     <Button
-        android:id="@+id/btn_update_setting"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:background="@drawable/selector_button_main"
-        android:gravity="center"
-        android:text="软件更新"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_body" />
-
-    <Button
         android:id="@+id/btn_logout_setting"
         android:layout_width="240dp"
         android:layout_height="40dp"

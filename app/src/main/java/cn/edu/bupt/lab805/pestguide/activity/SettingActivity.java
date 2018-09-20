@@ -18,8 +18,6 @@ public class SettingActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_logout_setting)
     Button btnLogout;
-    @BindView(R.id.btn_update_setting)
-    Button btnUpdate;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     private DBHelper dbHelper;
@@ -34,29 +32,13 @@ public class SettingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         dbHelper = DBHelper.getInstance();
 
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dbHelper.deleteLogininfo();
-                dbHelper.deleteAllDepot();
-//                dbHelper.deleteAllUpload();
-                dbHelper.deleteAllUser();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(SettingActivity.this, LoginActivity.class));
-                    }
-                }).start();
-                ActivityManager.getInstance().exit();
-                finish();
-            }
-        });
-        //软件更新
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
+        btnLogout.setOnClickListener(view -> {
+            dbHelper.deleteLogininfo();
+            dbHelper.deleteAllDepot();
+            dbHelper.deleteAllUser();
+            new Thread(() -> startActivity(new Intent(SettingActivity.this, LoginActivity.class))).start();
+            ActivityManager.getInstance().exit();
+            finish();
         });
     }
 

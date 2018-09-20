@@ -1,21 +1,18 @@
 package cn.edu.bupt.lab805.pestguide.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -79,15 +76,12 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         searchKey.setOnClickListener(this);
 
         adapter = new PestBookAdapter(this, pest);
-        adapter.setOnItemClickListener(new PestBookAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int pos) {
-                Intent data = new Intent();
-                data.putExtra("name", pest.get(pos).getName());
-                data.putExtra("index", index);
-                setResult(RESULT_OK, data);
-                finish();
-            }
+        adapter.setOnItemClickListener((view, pos) -> {
+            Intent data = new Intent();
+            data.putExtra("name", pest.get(pos).getName());
+            data.putExtra("index", index);
+            setResult(RESULT_OK, data);
+            finish();
         });
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);

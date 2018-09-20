@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/white_ripple"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="16dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_id_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/uploaddata_id"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_upload_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintLeft_toRightOf="@id/tv_id_tip"
+            app:layout_constraintTop_toTopOf="@id/tv_id_tip" />
+
+        <TextView
+            android:id="@+id/tv_binname_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/bin_name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintLeft_toLeftOf="@id/tv_id_tip"
+            app:layout_constraintTop_toBottomOf="@id/tv_id_tip" />
+
+        <TextView
+            android:id="@+id/tv_binname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintLeft_toRightOf="@id/tv_binname_tip"
+            app:layout_constraintTop_toTopOf="@id/tv_binname_tip" />
+
+        <TextView
+            android:id="@+id/tv_device_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/collect_device"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintLeft_toLeftOf="@id/tv_binname_tip"
+            app:layout_constraintTop_toBottomOf="@id/tv_binname_tip" />
+
+        <TextView
+            android:id="@+id/tv_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintLeft_toRightOf="@id/tv_device_tip"
+            app:layout_constraintTop_toTopOf="@id/tv_device_tip" />
+
+        <TextView
+            android:id="@+id/tv_time_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/collect_time"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/tv_binname_tip"
+            app:layout_constraintTop_toBottomOf="@id/tv_device_tip" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintLeft_toRightOf="@id/tv_time_tip"
+            app:layout_constraintTop_toTopOf="@id/tv_time_tip" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

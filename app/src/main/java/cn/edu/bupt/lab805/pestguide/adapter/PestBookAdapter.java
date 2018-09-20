@@ -54,7 +54,7 @@ public class PestBookAdapter extends RecyclerView.Adapter<PestBookAdapter.ViewHo
         } else {
             holder.importance.setText("");
         }
-        switch (datas.get(position).getCategory()){
+        switch (datas.get(position).getCategory()) {
             case "甲虫类":
                 holder.typeIcon.setImageResource(R.mipmap.book_bettle);
                 break;
@@ -65,7 +65,7 @@ public class PestBookAdapter extends RecyclerView.Adapter<PestBookAdapter.ViewHo
                 holder.typeIcon.setImageResource(R.mipmap.book_mite);
                 break;
         }
-        String path = "file:///android_asset/"+datas.get(position).getPictureurl();
+        String path = "file:///android_asset/" + datas.get(position).getPictureurl();
         RequestOptions options = new RequestOptions();
         options.placeholder(R.mipmap.default_select_image);
         Glide.with(context).load(path)
@@ -77,13 +77,13 @@ public class PestBookAdapter extends RecyclerView.Adapter<PestBookAdapter.ViewHo
         return datas == null ? 0 : datas.size();
     }
 
-    public void setDatas(List<Pest> datas){
+    public void setDatas(List<Pest> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
 
-    public interface OnItemClickListener{
-        void onItemClick(View view,int pos);
+    public interface OnItemClickListener {
+        void onItemClick(View view, int pos);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -107,17 +107,14 @@ public class PestBookAdapter extends RecyclerView.Adapter<PestBookAdapter.ViewHo
         @BindView(R.id.pest_icon)
         ImageView pestIcon;
 
-        public ViewHolder(final View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(listener!=null){
-                        listener.onItemClick(v,getAdapterPosition());
-                    }
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onItemClick(v, getAdapterPosition());
                 }
             });
-            ButterKnife.bind(this, itemView);
         }
     }
 }

@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.bean.RealInsects;
 
@@ -58,13 +60,14 @@ public class UploadRVAdapter extends RecyclerView.Adapter<UploadRVAdapter.Upload
 
 
     class UploadVH extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_kind_item_upload)
         TextView tvPestName;
+        @BindView(R.id.tv_num_item_upload)
         TextView tvPestNumber;
 
         public UploadVH(View itemView) {
             super(itemView);
-            tvPestName = (TextView) itemView.findViewById(R.id.tv_kind_item_upload);
-            tvPestNumber = (TextView) itemView.findViewById(R.id.tv_num_item_upload);
+            ButterKnife.bind(this,itemView);
         }
     }
 }

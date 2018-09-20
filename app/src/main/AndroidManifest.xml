@@ -45,7 +45,7 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask"
@@ -88,6 +88,8 @@
         <activity
             android:name=".activity.ImageDetailActivity"
             android:theme="@style/ImageDetailStyle" />
+        <activity android:name=".activity.UploadDetailActivity" />
+        <activity android:name=".activity.UserInfoActivity"></activity>
     </application>
 
 </manifest>

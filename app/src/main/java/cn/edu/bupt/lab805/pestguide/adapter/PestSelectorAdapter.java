@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.bean.RealInsects;
 
@@ -54,7 +56,7 @@ public class PestSelectorAdapter extends RecyclerView.Adapter<PestSelectorAdapte
     @Override
     public void onBindViewHolder(final PestSelectorVH holder, final int position) {
         holder.tvPestName.setText(mDatas.get(position).getKind());
-        if (mDatas.get(position).getNum()!=null){
+        if (mDatas.get(position).getNum() != null) {
             holder.etPestNumber.setText(mDatas.get(position).getNum().toString());
         }
         holder.etPestNumber.setTag(position);
@@ -71,41 +73,32 @@ public class PestSelectorAdapter extends RecyclerView.Adapter<PestSelectorAdapte
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().equals("")){
+                if (s.toString().equals("")) {
                     mDatas.get(position).setNum(0);
-                }else {
+                } else {
                     mDatas.get(position).setNum(Integer.parseInt(s.toString()));
                 }
             }
         };
         //给etPestNumber设置焦点监听器
-        holder.etPestNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    holder.etPestNumber.addTextChangedListener(watcher);
-                } else {
-                    holder.etPestNumber.removeTextChangedListener(watcher);
-                }
+        holder.etPestNumber.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                holder.etPestNumber.addTextChangedListener(watcher);
+            } else {
+                holder.etPestNumber.removeTextChangedListener(watcher);
             }
         });
         // 如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemClick(holder.itemView, pos);
-                }
+            holder.itemView.setOnClickListener(v -> {
+                int pos = holder.getLayoutPosition();
+                mOnItemClickLitener.onItemClick(holder.itemView, pos);
             });
 
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemLongClick(holder.itemView, pos);
-                    return true;
-                }
+            holder.itemView.setOnLongClickListener(v -> {
+                int pos = holder.getLayoutPosition();
+                mOnItemClickLitener.onItemLongClick(holder.itemView, pos);
+                return true;
             });
         }
     }
@@ -139,13 +132,14 @@ public class PestSelectorAdapter extends RecyclerView.Adapter<PestSelectorAdapte
 
     class PestSelectorVH extends RecyclerView.ViewHolder {
 
-        public TextView tvPestName;
-        public EditText etPestNumber;
+        @BindView(R.id.tv_item_pest_selector)
+        TextView tvPestName;
+        @BindView(R.id.et_item_pest_selector)
+        EditText etPestNumber;
 
         public PestSelectorVH(View itemView) {
             super(itemView);
-            tvPestName = (TextView) itemView.findViewById(R.id.tv_item_pest_selector);
-            etPestNumber = (EditText) itemView.findViewById(R.id.et_item_pest_selector);
+            ButterKnife.bind(this,itemView);
         }
     }
 

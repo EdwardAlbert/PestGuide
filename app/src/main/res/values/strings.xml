@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">虫情采集</string>
     <string name="app_label">虫情采集2.0</string>
-    <string name="base_url">http://106.38.157.60:11808/grainInsects</string>
+    <string name="base_url">http://106.38.157.59:12808/grainInsects</string>
 
     <!--LoginActivity-->
     <string name="request_for_username">请输入用户名</string>
@@ -94,12 +94,15 @@
     <string name="longitude">经度</string>
     <string name="latitude">纬度</string>
     <string name="loc_unit">°</string>
+    <string name="loc_unit_format">%.2f°</string>
     <string name="envir_info">环境信息</string>
     <string name="temper_and_humi">温湿度</string>
     <string name="temperature">温度</string>
     <string name="humidity">湿度</string>
     <string name="temper_unit">℃</string>
+    <string name="temper_unit_format">%.2f℃</string>
     <string name="humi_unit">%</string>
+    <string name="humi_unit_format">%.2f%%</string>
     <string name="request_for_photo">图片信息不能为空！</string>
     <string name="request_for_lcbm">请选择粮仓！</string>
     <string name="request_for_pos">请选择仓内拍摄位置！</string>
@@ -118,4 +121,10 @@
     <string name="kind">虫种</string>
     <string name="num">数量</string>
     <string name="pest_unit">头</string>
+
+    <!--UploadActivity-->
+    <string name="uploaddata_id">编号：</string>
+    <string name="bin_name">粮仓：</string>
+    <string name="collect_device">设备：</string>
+    <string name="collect_time">时间：</string>
 </resources>

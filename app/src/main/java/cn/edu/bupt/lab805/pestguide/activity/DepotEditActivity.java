@@ -129,42 +129,30 @@ public class DepotEditActivity extends AppCompatActivity {
 //        indate_tv.setText(inyear + "-" + (inmonth + 1) + "-" + inday); // 显示当前的年月日
 //        harvestdate_tv.setText(harvestyear + "-" + (harvestmonth + 1) + "-" + harvestday); // 显示当前的年月日
         // 添加单击事件--设置日期
-        indate_btn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog dpd = new DatePickerDialog(
-                        DepotEditActivity.this, InDatelistener, inyear,
-                        inmonth, inday);
-                dpd.show();// 显示DatePickerDialog组件
-            }
+        indate_btn.setOnClickListener(v -> {
+            DatePickerDialog dpd = new DatePickerDialog(
+                    DepotEditActivity.this, InDatelistener, inyear,
+                    inmonth, inday);
+            dpd.show();// 显示DatePickerDialog组件
         });
 
-        harvest_btn.setOnClickListener(new View.OnClickListener() {
+        harvest_btn.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
-
-                DatePickerDialog dpd = new DatePickerDialog(
-                        DepotEditActivity.this, HarvestDatelistener,
-                        harvestyear, harvestmonth, harvestday);
-                dpd.show();// 显示DatePickerDialog组件
-            }
+            DatePickerDialog dpd = new DatePickerDialog(
+                    DepotEditActivity.this, HarvestDatelistener,
+                    harvestyear, harvestmonth, harvestday);
+            dpd.show();// 显示DatePickerDialog组件
         });
 
-        submit_btn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                dialog = new ProgressDialog(DepotEditActivity.this);
-                dialog.setMessage(getString(R.string.uploading));
-                dialog.show();
-                uploadGrain(logininfo.getUsername(), logininfo.getPassword(), lcbm,
-                        grainname_et.getText().toString(), source_et.getText().toString(),
-                        clxs_sp.getSelectedItem().toString(), Integer.parseInt(innum_et.getText().toString()),
-                        indate_tv.getText().toString(), harvestdate_tv.getText().toString(),
-                        Integer.parseInt(reserve_et.getText().toString()));
-            }
+        submit_btn.setOnClickListener(arg0 -> {
+            dialog = new ProgressDialog(DepotEditActivity.this);
+            dialog.setMessage(getString(R.string.uploading));
+            dialog.show();
+            uploadGrain(logininfo.getUsername(), logininfo.getPassword(), lcbm,
+                    grainname_et.getText().toString(), source_et.getText().toString(),
+                    clxs_sp.getSelectedItem().toString(), Integer.parseInt(innum_et.getText().toString()),
+                    indate_tv.getText().toString(), harvestdate_tv.getText().toString(),
+                    Integer.parseInt(reserve_et.getText().toString()));
         });
     }
 

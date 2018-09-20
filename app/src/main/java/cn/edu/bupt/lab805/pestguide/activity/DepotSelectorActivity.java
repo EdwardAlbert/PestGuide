@@ -1,13 +1,12 @@
 package cn.edu.bupt.lab805.pestguide.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import java.util.List;
 
@@ -49,16 +48,13 @@ public class DepotSelectorActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         adapter = new DepotAdapter(this,depots);
-        adapter.setOnItemClickListener(new DepotAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int pos) {
-                Depot p = depots.get(pos);
-                Intent intent = new Intent();
-                intent.putExtra("lcbm", p.getLcbm());
-                intent.putExtra("lcmc", p.getBinname());
-                setResult(RESULT_OK, intent);
-                finish();
-            }
+        adapter.setOnItemClickListener((view, pos) -> {
+            Depot p = depots.get(pos);
+            Intent intent = new Intent();
+            intent.putExtra("lcbm", p.getLcbm());
+            intent.putExtra("lcmc", p.getBinname());
+            setResult(RESULT_OK, intent);
+            finish();
         });
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);

@@ -12,42 +12,44 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.bupt.lab805.pestguide.R;
-import cn.edu.bupt.lab805.pestguide.entity.Depot;
+import cn.edu.bupt.lab805.pestguide.bean.UploadData;
+import cn.edu.bupt.lab805.pestguide.util.StringUtils;
 
 /**
- * Created by zby on 2018/4/24.
+ * Created by zby on 2018/9/18.
  */
 
-public class DepotAdapter extends RecyclerView.Adapter<DepotAdapter.ViewHolder> {
-
-    private static final String TAG = "DepotAdapter";
+public class HistoryUploadAdapter extends RecyclerView.Adapter<HistoryUploadAdapter.ViewHolder> {
 
     private Context context;
     private LayoutInflater inflater;
-    private List<Depot> datas;
+    private List<UploadData> datas;
     private OnItemClickListener listener;
 
-    public DepotAdapter(Context context, List<Depot> datas) {
+    public HistoryUploadAdapter(Context context, List<UploadData> datas) {
         this.context = context;
         this.datas = datas;
         inflater = LayoutInflater.from(context);
     }
 
-    public void setDatas(List<Depot> datas) {
+    public void setDatas(List<UploadData> datas) {
         this.datas = datas;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewHolder holder = new ViewHolder(inflater.inflate(R.layout.item_depot, parent, false));
-        return holder;
+        View view = inflater.inflate(R.layout.item_upload_history, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.lcmc.setText(datas.get(position).getBinname());
-        holder.depottype.setText(datas.get(position).getTypebin());
-        holder.capacity.setText(datas.get(position).getCapacity().toString());
+        holder.tvId.setText(String.valueOf(datas.get(position).getId()));
+        holder.tvTime.setText(datas.get(position).getCollecttime());
+        holder.tvDevice.setText(StringUtils.whichString(datas.get(position).getSource(),"硬件设备"));
+        if (datas.get(position).getTgrainbin() != null) {
+            holder.tvBinname.setText(datas.get(position).getTgrainbin().getBinname());
+        }
     }
 
     @Override
@@ -65,19 +67,21 @@ public class DepotAdapter extends RecyclerView.Adapter<DepotAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_lcmc)
-        TextView lcmc;
-        @BindView(R.id.tv_depottype)
-        TextView depottype;
-        @BindView(R.id.tv_capacity)
-        TextView capacity;
+        @BindView(R.id.tv_binname)
+        TextView tvBinname;
+        @BindView(R.id.tv_device)
+        TextView tvDevice;
+        @BindView(R.id.tv_time)
+        TextView tvTime;
+        @BindView(R.id.tv_upload_id)
+        TextView tvId;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> {
-                if(listener!=null){
-                    listener.onItemClick(v,getAdapterPosition());
+                if (listener != null) {
+                    listener.onItemClick(v, getAdapterPosition());
                 }
             });
         }

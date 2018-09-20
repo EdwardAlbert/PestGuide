@@ -1,19 +1,16 @@
 package cn.edu.bupt.lab805.pestguide.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,12 +65,7 @@ public class PestSelectorActivity extends AppCompatActivity implements DeletePes
 
         recyclerView.setAdapter(adapter);
         btnAdd = (Button) findViewById(R.id.btn_add_pest_selector);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter.addData();
-            }
-        });
+        btnAdd.setOnClickListener(v -> adapter.addData());
 
     }
 

@@ -7,6 +7,7 @@ import java.util.Map;
 import cn.edu.bupt.lab805.pestguide.bean.Page;
 import cn.edu.bupt.lab805.pestguide.bean.RealTimeData;
 import cn.edu.bupt.lab805.pestguide.bean.Result;
+import cn.edu.bupt.lab805.pestguide.bean.UploadData;
 import cn.edu.bupt.lab805.pestguide.entity.Depot;
 import cn.edu.bupt.lab805.pestguide.entity.Factory;
 import cn.edu.bupt.lab805.pestguide.entity.Grain;
@@ -23,7 +24,6 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -75,4 +75,16 @@ public interface Api {
     @POST("app/depot/realtimedata/addRealDataPic")
     @Multipart
     Observable<Result> uploadPic(@PartMap Map<String, RequestBody> map);
+
+    @POST("app/depot/datacollect/getHisRealdata")
+    @FormUrlEncoded
+    Observable<Result<Page<UploadData>>> getHistoryData(@Field("username") String username, @Field("password") String password,
+                                                        @Field("page") String page, @Field("rows") String rows,
+                                                        @Field("sort") String sort, @Field("order") String order,
+                                                        @Field("lcbm") String lcbm, @Field("source") String source);
+
+    @POST("app/depot/datacollect/getHisRealdata")
+    @FormUrlEncoded
+    Observable<Result<Page<UploadData>>> getHistoryDataById(@Field("username") String username, @Field("password") String password,
+                                                            @Field("page") String page, @Field("rows") String rows, @Field("id") long id);
 }

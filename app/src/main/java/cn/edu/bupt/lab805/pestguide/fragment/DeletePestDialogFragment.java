@@ -43,20 +43,12 @@ public class DeletePestDialogFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_delete_pest_dialog, container, false);
         btnDelete = (Button) view.findViewById(R.id.btn_confirm_delete_pest);
         btnCancel = (Button) view.findViewById(R.id.btn_cancel_delete_pest);
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeletePestListener listener = (DeletePestListener) getActivity();
-                listener.onPestDelete(index);
-                dismiss();
-            }
+        btnDelete.setOnClickListener(v -> {
+            DeletePestListener listener = (DeletePestListener) getActivity();
+            listener.onPestDelete(index);
+            dismiss();
         });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        btnCancel.setOnClickListener(v -> dismiss());
         return view;
     }
 

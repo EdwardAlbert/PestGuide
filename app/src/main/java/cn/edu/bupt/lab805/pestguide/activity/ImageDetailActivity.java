@@ -2,9 +2,11 @@ package cn.edu.bupt.lab805.pestguide.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 
 import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,12 +31,20 @@ public class ImageDetailActivity extends Activity {
         String path = getIntent().getStringExtra("imgPath");
         String clazz = getIntent().getStringExtra("Class");
 
-        //缩放
+        RequestOptions options = new RequestOptions();
+        options.placeholder(R.mipmap.upload_picture_default);
         if (clazz.equalsIgnoreCase("UploadFragment")) {
-            Glide.with(this).load("file:///" + path).into(photoView);
+            Glide.with(this)
+                    .setDefaultRequestOptions(options)
+                    .load("file:///" + path)
+                    .into(photoView);
         } else {
-            Glide.with(photoView.getContext()).load(path)
+            Glide.with(photoView.getContext())
+                    .setDefaultRequestOptions(options)
+                    .load(path)
                     .into(photoView);
         }
+
+        photoView.setOnClickListener(v -> finish());
     }
 }

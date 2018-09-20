@@ -210,6 +210,19 @@ public class DBHelper {
     }
 
     /**
+     * 查询用户列表
+     * @return
+     */
+    public List<User> queryUserList(){
+        try{
+            return userDao.queryBuilder().list();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * 获取粮仓列表
      *
      * @return

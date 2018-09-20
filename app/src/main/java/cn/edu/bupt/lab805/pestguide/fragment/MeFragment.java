@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -15,6 +16,7 @@ import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.activity.FactoryActivity;
 import cn.edu.bupt.lab805.pestguide.activity.SettingActivity;
 import cn.edu.bupt.lab805.pestguide.activity.UploadActivity;
+import cn.edu.bupt.lab805.pestguide.activity.UserInfoActivity;
 import cn.edu.bupt.lab805.pestguide.entity.Factory;
 import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
 import cn.edu.bupt.lab805.pestguide.entity.User;
@@ -81,7 +83,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.me_factory:
                 startActivity(new Intent(getActivity(), FactoryActivity.class));
                 break;
@@ -90,6 +92,9 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.me_mecheck:
                 startActivity(new Intent(getActivity(), UploadActivity.class));
+                break;
+            case R.id.me_inform:
+                startActivity(new Intent(getActivity(), UserInfoActivity.class));
                 break;
         }
     }
