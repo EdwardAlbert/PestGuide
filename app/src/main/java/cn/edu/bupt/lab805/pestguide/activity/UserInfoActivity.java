@@ -1,7 +1,6 @@
 package cn.edu.bupt.lab805.pestguide.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +8,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
@@ -19,14 +16,12 @@ import butterknife.ButterKnife;
 import cn.edu.bupt.lab805.pestguide.R;
 import cn.edu.bupt.lab805.pestguide.adapter.UserListAdapter;
 import cn.edu.bupt.lab805.pestguide.application.MyApplication;
-import cn.edu.bupt.lab805.pestguide.bean.Result;
 import cn.edu.bupt.lab805.pestguide.entity.Logininfo;
 import cn.edu.bupt.lab805.pestguide.entity.User;
 import cn.edu.bupt.lab805.pestguide.util.Api;
 import cn.edu.bupt.lab805.pestguide.util.DBHelper;
 import cn.edu.bupt.lab805.pestguide.widget.MyItemAnimator;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class UserInfoActivity extends AppCompatActivity {
